@@ -1,0 +1,24 @@
+.topnav-logo {
+    height: 50px;
+    width: 178px;   
+}
+.topnav-header{
+    font-size: 12px;
+    vertical-align: middle;
+    font-style: bold;
+}
+
+.right-align {
+	padding-right : 5px;
+}
+
+.scroll-class{
+	max-height:400px;
+	overflow-y:scroll;
+}
+.navbar {
+	position: fixed;
+}
+.username-label {
+	color: #333;
+}

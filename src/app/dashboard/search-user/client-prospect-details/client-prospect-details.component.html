@@ -1,0 +1,562 @@
+<app-module-heading moduleHeading="Client/Prospect Personal Details"></app-module-heading>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Client/Prospect Personal Details</h4>
+				<!-- End of panel-heading -->
+			</div>
+			<form #showClientForm="ngForm"  >
+			<div class="panel-body"> 
+			
+				<div class="col-xs-12 col-sm-12">
+					<!-- Group panel: Personal Particulars -->
+					<fieldset class="fsStyle" disabled = "disabled">
+						
+						<!--Group Label: Personal Particulars  -->
+						<legend class="legendStyle">Identification</legend>
+
+						<!-- Status & Client Segment -->
+						<div class="row" >
+							<!-- Label: Status-->
+							<label class="col-sm-3">Status</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Status -->
+								<input id="client-status" type="text" name="clientStatus" 
+								class="input-sm form-control" maxlength=40 [(ngModel)]="clModel.clientAdviceIndDesc"> 
+							</div>
+							<!-- End of Status Input: Column -->
+							
+							<!-- Label: Client Segment-->
+							<label class="col-sm-2">Client Segment</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Client Segment -->
+								<input id="client-segment" type="text" name="clientSegment" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientPwInd">
+							</div>
+							<!-- End of Client Segment Input: Column -->
+						</div>
+						<!--End of Status & Client Segment: Row  -->
+						
+						<!-- CIF & Client Type Group -->
+						<div class="row">
+							<!-- Label: CIF-->
+							<label class="col-sm-3">CIF</label>
+
+							<div class="col-sm-3">
+								<!-- Input: CIF -->
+								<input id="client-cif" type="text" name="clientCif" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientCifNo" >
+							</div>
+							<!-- End of CIF Input: Column -->
+							
+							<!-- Label: Client Type Group-->
+							<label class="col-sm-2">Client Type Group</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Client Type Group -->
+								<input id="client-type-group" type="text" name="clientTypeGroup" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientTypeIndDesc" >
+							</div>
+							<!-- End of Client Type Group Input: Column -->
+						</div>
+						<!--End of CIF & Client Type Group: Row  -->
+						
+						<!-- Salutation & Accredited Investor -->
+						<div class="row">
+							<!-- Label: Salutation-->
+							<label class="col-sm-3">Salutation</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Salutation -->
+								<input id="client-salutation" type="text" name="clientSalutationId" 
+								class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientSalutationId">
+							</div>
+							<!-- End of Salutation Input: Column -->
+							
+							<!-- Label: Accredited Investor-->
+							<label class="col-sm-2">Accredited Investor</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Accredited Investor -->
+								<input id="client-accredited-investor" type="text" name="clientAccInvestor" 
+								class="input-sm form-control" maxlength=40 [(ngModel)]="clModel.clientAiIndDesc">
+							</div>
+							<!-- End of Salutation & Accredited Investor Input: Column -->
+						</div>
+						<!--End of Salutation & Accredited Investor: Row  -->
+						
+						<!-- Full Name & AI Inception Date-->
+						<div class="row">
+							<!-- Label: Salutation-->
+							<label class="col-sm-3">Full Name</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Full Name -->
+								<input  type="text"  [(ngModel)]="clModel.clientFullname" name="clientFullName" 
+								class="input-sm form-control" maxlength=40 >
+							</div>
+							<!-- End of Full Name Input: Column -->
+							
+							<!-- Label: AI Inception Date-->
+							<label class="col-sm-2">AI Inception Date</label>
+
+							<div class="col-sm-3">
+								<!-- Input: AI Inception Date -->
+								<input id="client-ai-inception-date" type="text" name="clientAiInceptionDate" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientAiInceptionDt">
+							</div>
+							<!-- Full Name & AI Inception Date: Column -->
+						</div>
+						<!--End of Full Name & AI Inception Date: Row  -->
+						
+						<!-- ID Type & AI Expiry Date-->
+						<div class="row">
+							<!-- Label: ID Type-->
+							<label class="col-sm-3">ID Type</label>
+
+							<div class="col-sm-3">
+								<!-- Input: ID Type -->
+								<input id="client-id-type" type="text" name="clientIdType" 
+								class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientIdType">
+							</div>
+							<!-- End of ID Type Input: Column -->
+							
+							<!-- Label: AI Expiry Date-->
+							<label class="col-sm-2">AI Expiry Date</label>
+
+							<div class="col-sm-3">
+								<!-- Input: AI Expiry Date -->
+								<input id="client-ai-expiry-date" type="text" name="clientAiExpiryDate" 
+								class="input-sm form-control" maxlength=40 [(ngModel)]="clModel.clientAiExpiryDt">
+							</div>
+							<!-- ID Type & AI Expiry Date: Column -->
+						</div>
+						<!--End of ID Type & AI Expiry Date: Row  -->
+						
+						<!-- ID & Blacklisted-->
+						<div class="row">
+							<!-- Label: ID -->
+							<label class="col-sm-3">ID</label>
+
+							<div class="col-sm-3">
+								<!-- Input: ID  -->
+								<input id="client-id" type="text" name="clientId" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientIdNo">
+							</div>
+							<!-- End of ID Input: Column -->
+							
+							<!-- Label: Blacklisted-->
+							<label class="col-sm-2">Blacklisted</label>
+
+							<div class="col-sm-3">
+								<!-- Input: AI Blacklisted -->
+								<input id="client-Blacklisted" type="text" name="clientBlacklisted" 
+								class="input-sm form-control" maxlength=40 [(ngModel)]="clModel.clientBlacklistIndDesc" >
+							</div>
+							<!-- ID & Blacklisted: Column -->
+						</div>
+						<!--End of ID & Blacklisted: Row  -->
+						
+						<!-- Date Of Birth & Contact Num HP -->
+						<div class="row">
+							<!-- Label: Date Of Birth  -->
+							<label class="col-sm-3">Date of Birth/ Date of Incorporation</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Date Of Birth   -->
+								<input id="client-dob" type="text" name="clientDob" 
+								class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientExt.client_bir_Inc_dt" >
+							</div>
+							<!-- End of Date Of Birth Input: Column -->
+							
+							<!-- Label: Contact Num HP -->
+							<label class="col-sm-2">Contact Num -HP </label>
+
+							<div class="col-sm-3">
+								<!-- Input: Contact Num HP  -->
+								<input id="client-Contact-Num-Hp" type="text" name="clientContactNumHp" 
+								class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientMobileId">
+							</div>
+							<!-- Date Of Birth & Contact Num HP : Column -->
+						</div>
+						<!--End of Date Of Birth & Contact Num HP : Row  -->
+						
+						<!-- Age & Contact Num H -->
+						<div class="row">
+							<!-- Label: Age  -->
+							<label class="col-sm-3">Age</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Age   -->
+								<input id="client-age" type="text" name="clientAge" 
+								class="input-sm form-control" maxlength=40 >
+							</div>
+							<!-- End of Age Input: Column -->
+							
+							<!-- Label: Contact Num H -->
+							<label class="col-sm-2">Contact Num -H </label>
+
+							<div class="col-sm-3">
+								<!-- Input: Contact Num H  -->
+								<input id="client-Contact-Num-H" type="text" name="clientContactNumH" 
+								class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientHomeId">
+							</div>
+							<!-- End of Age & Contact Num H : Column -->
+						</div>
+						<!--End of Age & Contact Num H : Row  -->
+						
+						<!-- Gender & Contact Num O -->
+						<div class="row">
+							<!-- Label: Gender  -->
+							<label class="col-sm-3">Gender</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Gender   -->
+								<input id="client-gender" type="text" name="clientGender" 
+								class="input-sm form-control" maxlength=40 [(ngModel)]="clModel.clientGenderDesc" >
+							</div>
+							<!-- End of Gender Input: Column -->
+							
+							<!-- Label: Contact Num O -->
+							<label class="col-sm-2">Contact Num -O </label>
+
+							<div class="col-sm-3">
+								<!-- Input: Contact Num O  -->
+								<input id="client-Contact-Num-O" type="text" name="clientContactNumO" 
+								class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientOfficeId">
+							</div>
+							<!-- End of Contact Num O : Column -->
+						</div>
+						<!--End of Gender & Contact Num O : Row  -->
+						
+						<!-- Nationality-->
+						<div class="row">
+							<!-- Label: Nationality  -->
+							<label class="col-sm-3">Nationality/ Country Incorporation</label>
+
+							<div class="col-sm-3">
+								<!-- Input: Nationality   -->
+								<select class="form-control" name="clientNationality" [(ngModel)]="clModel.clientNationalityDesc">
+										<option *ngFor="let client of countryArray" value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Nationality Input: Column -->
+							
+						</div>
+						<!--End of Gender & Contact Num O : Row  -->
+						
+						<!-- Residential Address &  US Citizen -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address -->
+							<label class="col-sm-3">Residential Address</label>
+
+							<!-- Column: Registered Address1 -->
+							<div class="col-sm-3">
+
+								<!-- Input: Address1 -->
+								<input type="text" name="clientAddress1"
+									class="input-sm form-control" maxlength=40
+									 [(ngModel)]="clModel.clientAddressDet[0].addressLine1">
+							</div>
+							<!-- End of Address1 Input: Column -->
+							
+							<!-- Label: US Citizen -->
+							<label class="col-sm-2"> US Citizen</label>
+
+							<!-- Column:  US Citizen -->
+							<div class="col-sm-3">
+
+								<!-- Input:  US Citizen -->
+								<input type="text" name="clientUSCitizen"
+									class="input-sm form-control" maxlength=40 
+									[(ngModel)]="clModel.clientUsIndDesc">
+							</div>
+							<!-- End of US Citizen Input: Column -->
+
+						</div>
+						<!--End of Address & US Citizen: Row  -->
+
+						<!-- Residential Address 2 & User Info Code -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 2 -->
+							<label class="col-sm-3"></label>
+
+							<!-- Column: Registered Address 2 -->
+							<div class="col-sm-3">
+
+								<!-- Input:Address 2 -->
+								<input type="text" name="clientAddress2"
+									class="input-sm form-control" maxlength=40  maxlength=40 [(ngModel)]="clModel.clientAddressDet[0].addressLine2">
+							</div>
+							<!-- End of Address2 Input: Column -->
+							
+							<!-- Label: User Info Code -->
+							<label class="col-sm-2">User Info Code</label>
+
+							<!-- Column: User Info Code-->
+							<div class="col-sm-3">
+
+								<!-- Input:User Info Code -->
+								<input type="text" name="clientUserInfoCode"
+									class="input-sm form-control" maxlength=40 >
+							</div>
+							<!-- End of User Info Code Input: Column -->
+
+						</div>
+						<!--End of Address2 & User Info Code: Row  -->
+
+						<!-- Residential Address 3 & Message -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 3 -->
+							<label class="col-sm-3"></label>
+
+							<!-- Column: Registered Address 3 -->
+							<div class="col-sm-3">
+
+								<!-- Input:Address 3 -->
+								<input type="text" name="clientAddress3"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientAddressDet[0].addressLine3">
+							</div>
+							<!-- End of Address3 Input: Column -->
+							
+							<!-- Label: Message -->
+							<label class="col-sm-2">Message</label>
+
+							<!-- Column: Message -->
+							<div class="col-sm-3">
+
+								<!-- Input:Message -->
+								<input type="text" name="clientMessage"
+									class="input-sm form-control" maxlength=40 >
+							</div>
+							<!-- End of Message Input: Column -->
+
+						</div>
+						<!--End of Message: Row  -->
+
+						<!-- Residential Address 4 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 4 -->
+							<label class="col-sm-3"></label>
+
+							<!-- Column: Registered Address 4 -->
+							<div class="col-sm-3">
+
+								<!-- Input: Address4 -->
+								<input type="text" name="clientAddress4"
+									class="input-sm form-control" maxlength=40   [(ngModel)]="clModel.clientAddressDet[0].addressLine4">
+							</div>
+							<!-- End of Address4 Input: Column -->
+
+						</div>
+						<!--End of Address4: Row  -->
+						
+						<!-- Street -->
+						<div class="form-group row">
+
+							<!-- Label: Street-->
+							<label class="col-sm-3">Street</label>
+
+							<!-- Column: Street -->
+							<div class="col-sm-3">
+
+								<!-- Input: Street -->
+								<input type="text" name="clientStreet"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientAddressDet[0].addressStName">
+							</div>
+							<!-- End of Street Input: Column -->
+
+						</div>
+						<!--End of Street: Row  -->
+						
+						<!-- PostCode -->
+						<div class="form-group row">
+
+							<!-- Label: PostCode-->
+							<label class="col-sm-3">Postcode</label>
+
+							<!-- Column: Postcode -->
+							<div class="col-sm-3">
+
+								<!-- Input: Postcode -->
+								<input type="text" name="clientPostcode"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="clModel.clientAddressDet[0].addressPostcode">
+							</div>
+							<!-- End of Postcode Input: Column -->
+
+						</div>
+						<!--End of Postcode: Row  -->
+						
+					</fieldset>
+					<!-- End of Identification: Group Panel-->
+				</div>
+				<!-- End of Identification -->
+				
+				<!-- Additional Information -->
+				<div class="col-xs-12 col-sm-12">
+					<!-- Group panel: Additional Information -->
+					<fieldset class="fsStyle">
+
+						<!--Group Label: Additional Information  -->
+						<legend class="legendStyle">Additional Information</legend>
+
+						<!-- Marital Status & Industry -->
+						<div class="row">
+							<!-- Label: Marital Status -->
+							<label class="col-sm-3">Marital Status</label>
+
+							<!--Input: Marital Status-->
+							<div class="col-sm-3">
+								
+								<select class="form-control" name="clientMaritalStatus"  [(ngModel)]="clModel.clientMaritalId">
+									<option  value="1">Single</option>
+									<option  value="2">Married</option>
+									<option  value="3">Divorced</option>
+									<option  value="4">Widowed</option>
+								</select>
+							</div>
+							<!-- End of Marital Status: Column -->
+							
+							<!-- Label: Industry -->
+							<label class="col-sm-2">Industry</label>
+
+							<div class="col-sm-3">
+								<!-- ***UPDATE:Dropdown:Industry(Array)***-->
+								<select class="form-control" name="clientIndustry" [(ngModel)]="clModel.clientExt.clientIndustryId">
+									<option *ngFor="let client of clientIndustrysArray">{{client.client_industry}}</option>
+								</select>
+							</div>
+							<!-- End of Industry Dropdown: Column -->
+						</div>
+						<!--End of Marital Status & Industry: Row  -->
+
+						<!-- Highest Graduation Level & Occupation -->
+						<div class="row">
+
+							<!-- Label: Highest Graduation Level -->
+							<label class="col-sm-3">Highest Graduation Level</label>
+
+							<!--Input: Highest Graduation Level-->
+							<div class="col-sm-3">
+								<select class="form-control" name="clientEducLevel"  [(ngModel)]="clModel.clientEducationId">
+									<option *ngFor="let client of educationLevelArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Highest Graduation Level: Column -->
+							
+							<!-- Label: Occupation -->
+							<label class="col-sm-2">Occupation</label>
+
+							<div class="col-sm-3">
+								<!-- ***UPDATE:Dropdown: Occupation (Array)***-->
+								<select class="form-control" name="clientOccupation" [(ngModel)]="clModel.clientOccupation">
+									<option *ngFor="let client of clientOccupationArray">{{client.client_occupation}}</option>
+								</select>
+							</div>
+							<!-- End of Occupation Dropdown: Column -->
+							
+						</div>
+						<!--End of Highest Graduation Level & Occupation: Row  -->
+						
+						<!-- Employment Status & Company Name -->
+						<div class="row">
+						
+							<!-- Label: Employment Status -->
+							<label class="col-sm-3">Employment Status</label>
+
+							<div class="col-sm-3">
+								<!--Input: Employment Status-->
+								<select class="form-control" name="clientEmpStatus"  [(ngModel)]="clModel.clientEmploymentStatus">
+									<option *ngFor="let client of employmentStatusArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Employment Status: Column -->
+
+							<!-- Label: Company Name -->
+							<label class="col-sm-2">Company Name</label>
+
+							<div class="col-sm-3">
+
+								<!--Input: Company Name-->
+								<input type="text" name="clientCompName"
+									class="input-sm form-control" placeholder="Company Name"
+									maxvalue=80  [(ngModel)]="clModel.clientCompanyName">
+							</div>
+							<!-- End of Company Name: Column -->
+
+						</div>
+						<!--End of Company Name: Row  -->
+
+						<!-- Email & Previous Company -->
+						<div class="row">
+							<!-- Label: Email -->
+							<label class="col-sm-3">Email</label>
+
+							<div class="col-sm-3">
+
+								<!--Input: Email-->
+								<input type="text" name="clientEmail"
+									class="input-sm form-control" placeholder="Email"
+									maxvalue=80 [(ngModel)]="clModel.clientExt.clientEmailId">
+							</div>
+							<!-- End of Email: Column -->
+							
+							<!-- Label: Previous Employment -->
+							<label class="col-sm-2">Previous Employment</label>
+
+							<div class="col-sm-3">
+
+								<!--Input: Previous Employment-->
+								<input type="text" name="clientPrevEmployment"
+									class="input-sm form-control" placeholder="Previous Employment"
+									maxvalue=80 [(ngModel)]="clModel.clientExt.clientPrevIndustryId">
+							</div>
+							<!-- End of Previous Employment: Column -->
+
+						</div>
+						<!--End of Email & Previous Company: Row  -->
+						
+					</fieldset>
+					<!-- End of Additional Info: Group Panel-->
+				</div>
+				<!-- End of Additional Info -->
+
+				<!-- Buttons -->
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-left" routerLink="/dashboard/search-user/search-client-prospect">
+								<span class="glyphicon glyphicon-chevron-left"></span> Back
+							</button>
+						</div>
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-right" (click)="saveIndClientProspect()">
+								Save 
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- End of Buttons -->
+
+			</div>
+			<!-- End of panel-body -->
+			</form>
+		</div>
+		<!-- End of panel-default -->
+
+
+
+	</div>
+	<!-- end of page row -->
+
+</div>

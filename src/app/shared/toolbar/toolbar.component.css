@@ -1,0 +1,9 @@
+.btn-group {
+	margin: 51px auto 0;
+}
+.btn {
+	padding-left: 40px;
+}
+.btn:hover{
+	color: #C47D15;
+}

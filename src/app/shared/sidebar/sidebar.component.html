@@ -1,0 +1,33 @@
+
+<div class="navbar-default sidebar" role="navigation">
+	                <div class="sidebar-nav navbar-collapse">
+	                    <ul class="nav" id="side-menu">
+	                    	<form>
+	                        <li class="sidebar-search">
+	                            <div class="input-group custom-search-form">
+	                            	
+	                                <input type="text" [(ngModel)]="menuSearch" name="menuSearch" class="cc form-control" (ngModelChange)="setDefaultMenu()" placeholder="Search...">
+	                                <span class="input-group-btn">
+	                                <button class="a btn btn-default" (click)="searchMenu()" type="submit">
+	                                    <i class="fa fa-search"></i>
+	                                </button>                            	
+	                            	</span>
+	                            	
+	                            </div>
+	                            <!-- Author: Ricardo -->
+	                            <!-- Dynamic Menu from JSON file (menu.json) -->
+	                        </li>
+	                        </form>
+	                        <li *ngFor="let item of menu" class="{{ item.className }}">        
+	                            <a><i class="{{ item.code }}"></i>{{ item.title }}
+	                            <span class="fa arrow" *ngIf="item.subMenuList?.length > 0"></span></a>
+	                            <ul class="nav nav-second-level" *ngIf="item.subMenuList?.length > 0">
+	                                <li *ngFor="let subitem of item.subMenuList" >
+	                                    <a [routerLinkActive]="['active']" class="{{subitem.className}}" routerLink="{{ subitem.link }}">{{subitem.title}}</a>
+	                                </li>
+	                            </ul>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <!-- /.sidebar-collapse -->
+</div>

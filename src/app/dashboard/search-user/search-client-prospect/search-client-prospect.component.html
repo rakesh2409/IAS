@@ -1,0 +1,150 @@
+<app-toolbar></app-toolbar>
+<app-module-heading moduleHeading="Search Client/Prospect"></app-module-heading>
+
+<div class="container-fluid">
+	<app-error [errorMsg]="error" [successMsg]="successMsg" [infoMsg]="infoMsg"></app-error>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Search Client/Prospect</h4>
+			</div>
+			<div class="panel-body">
+			<form (ngSubmit)="findClientIdAndName(searchId,searchName)"
+						#searchForm="ngForm">
+				<div class="row">
+					
+						<div class="row">
+
+							<div class="col-xs-3 col-sm-3 form-group no-padding">
+								<label class="col-xs-3 col-sm-3">ID</label>
+								<div class="col-xs-8 col-sm-8">
+								
+									<input type="text" placeholder="Client ID"
+										class="input-sm form-control" maxlength=20
+										[(ngModel)]="searchId" name="searchId">
+							
+								</div>
+								<label class="col-xs-2 col-sm-3">Name</label>
+								<div class="col-xs-8 col-sm-8">
+									<input type="text" name="mainName" placeholder="Client Name"
+										class="input-sm form-control" maxlength=80 
+										[(ngModel)]="searchName">
+								</div>
+							</div>
+
+
+							<!-- Additional Joint -->
+							<div *ngFor="let joint of listOfJoints; let cnt = index"
+								class="col-xs-3 col-sm-3 form-group no-padding">
+								<div *ngIf="joint.show">
+									<label class="col-xs-3 col-sm-3">ID</label>
+									<div class="col-xs-7 col-sm-7">
+										<input type="text" name="id{{cnt}}" [(ngModel)]="joint.jointId"
+											placeholder="Client ID" class="input-sm form-control"
+											maxlength=20 >
+									</div>
+
+									<div class="col-xs-1 col-sm-1">
+										<button type="button" (click)="removeJoint(cnt)" class="close">&times;</button>
+
+									</div>
+
+									<label class="col-xs-3 col-sm-3">Name</label>
+									<div class="col-xs-7 col-sm-7">
+										<input type="text" name="name{{cnt}}" [(ngModel)]="joint.jointName"
+											placeholder="Client Name" class="input-sm form-control"
+											maxlength=80 >
+									</div>
+								</div>
+								<!-- End of Joint -->
+							</div>
+						</div>
+					
+					<div class="row">
+						<!-- Joint Search Buttons -->
+						<div class="col-md-12 text-right">
+							<button type="submit"
+								class="btn btn-space btn-warning custom-button-width pull-right">
+								<span class="glyphicon glyphicon-search"></span> Search
+							</button>
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-right"
+								(click)="addJoint()">
+								<span class="glyphicon glyphicon-plus"></span> Joint
+							</button>
+						</div>
+						<!-- End of Buttons -->
+					</div>
+				</div>
+				</form>
+				<!-- end of panel body -->
+			</div>
+			<!-- End of panel deafult -->
+		</div>
+
+		<!-- Search Result -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Search Results</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<table class="table table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>Select</th>
+									<th>Salutation</th>
+									<th>Name</th>
+									<th>ID Number</th>
+									<th>Client Segment</th>
+									<th>AI Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- **********UPDATE THIS PART******* -->
+								<tr (dblclick)="selectUserRow(clients)"
+									*ngFor="let clients of clientList; let i = index"
+									[class.active]="i == activeRowIndex" >
+									<td><input type = "checkbox"></td>
+									<td>{{clients.clientSalutationId}}</td>
+									<td>{{clients.clientFullname}}</td>
+									<td><a href="#clientId" (click)="selectedClientRow(clients.clientIdNo)">{{clients.clientIdNo}}</a></td>
+									<td>{{clients.clientPwInd}}</td>
+									<td></td>
+								</tr>
+								<tr *ngIf="clientList?.length <= 0">
+									<td colspan="9">No Records Found.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<!-- Joint Search Buttons -->
+
+					<div class="col-md-12 text-right">
+
+						<button type="button"
+							class="btn btn-space btn-warning custom-button-width pull-right"
+							routerLink="/dashboard/search-user/client-prospect-details/0">
+							<span class="glyphicon glyphicon-file"></span> Create New Plan
+						</button>
+						<button type="button"
+							class="btn btn-space btn-warning custom-button-width pull-right"
+							routerLink="/dashboard/search-user/create-prospect">
+							<span class="glyphicon glyphicon-user"></span> Create Prospect
+						</button>
+						<!-- End of Buttons -->
+					</div>
+
+					<!-- end of search result row -->
+				</div>
+				<!-- end of panel body -->
+			</div>
+			<router-outlet></router-outlet>
+			<!-- End of panel deafult -->
+		</div>
+
+		<!-- end of page row -->
+	</div>
+</div>

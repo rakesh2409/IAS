@@ -1,0 +1,22 @@
+ { 
+     "menu": [
+        {
+            "title": "Dashboard",
+            "icon": "fa fa-laptop",
+            "link": ""
+        
+        },
+        {
+            "title": "Services",
+            "icon": "fa fa-laptop",
+            "link": ""
+        
+        },
+        {
+            "title": "About",
+            "icon": "fa fa-laptop",
+            "link": ""
+        
+        }
+    ]
+ }

@@ -1,0 +1,18 @@
+<app-toolbar></app-toolbar>
+<app-error [errorMsg] = "error" [successMsg]="successMsg" [infoMsg] = "infoMsg"></app-error>
+<app-module-heading moduleHeading="Product Providers Listing"></app-module-heading>
+<div class="container" >
+  <br><br>
+  <ul class="nav nav-tabs" >
+    <li (click)="setActiveTab('unit-trust')" class="active"><a data-toggle="tab" href="#unit-trust" #unitTurstTab   >Unit Trust</a></li>
+    <li (click)="setActiveTab('insurance')" ><a data-toggle="tab" href="#insurance" #insuranceTab   >Insurance</a></li>
+  </ul>
+  <div class="tab-content" style="border-bottom: 1px solid #c1ccd1; border-left: 1px solid #c1ccd1; border-right:1px solid #c1ccd1">
+    <div id="unit-trust" class="tab-pane fade in active">
+      <app-unit-trust-tab></app-unit-trust-tab>
+    </div>
+    <div id="insurance" class="tab-pane fade">
+      <app-insurance-tab></app-insurance-tab>
+    </div>
+  </div>
+</div>

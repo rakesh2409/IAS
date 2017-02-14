@@ -1,0 +1,71 @@
+<div class="container-fluid">
+	<div class="form-group col-md-12">
+		<div class="col-md-2">{{ productTypeIndicator }}</div>
+		<div class="col-md-2">
+			<select class="form-control" [(ngModel)]="selectedProductType.description"
+        (change)="onSelect($event.target.value)">
+				<option value="Select">--Select-One--</option>
+				<option *ngFor="let product of productTypes"
+					value="{{ product.description }}">{{ product.description }}</option>
+			</select>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="table-responsive col-md-12">
+			<table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+					<th>
+            Product ID
+            <input type="text" class="form-control" [(ngModel)]="filterByProductID" placeholder="Search by product id" />
+          </th>
+					<th>
+            Product Name
+            <input type="text" class="form-control" [(ngModel)]="filterByProductName" placeholder="Search by product name" />
+          </th>
+					<th>Product Type</th>
+					<th>Curency</th>
+					<th>Product Status</th>
+					<th>
+            Prod Risk Rating
+            <input type="text" class="form-control" [(ngModel)]="filterByRiskRating" placeholder="Search by risk rating" />
+          </th>
+					<th>Client Segment</th>
+					<th>AI Status</th>
+					<th>Premium Type</th>
+					<th>Tenure</th>
+				</tr>
+        </thead>
+				<tr *ngFor="let item of productList
+          | productType:selectedProductType.description:filterByProductID
+          | productName:selectedProductType.description:filterByProductName
+          | riskRating:selectedProductType.description:filterByRiskRating
+					| paginate: {itemsPerPage: 5, currentPage:page, id: '1'}"
+					(click)="selectedProductRow(item.productPkId,item.workflowStatus,item.productType)"
+          >
+					<td>{{ item.productId }}</td>
+					<td>{{ item.productName }}</td>
+					<td>{{ item.productTypeDesc }}</td>
+					<td>{{ item.currency }}</td>
+					<td>{{ item.productStatus }}</td>
+					<td>{{ item.riskRating }}</td>
+					<td>{{ item.prodSegmentCd }}</td>
+					<td>{{ item.aiProductInd }}</td>
+					<td>{{ item.premTypeDesc }}</td>
+					<td>{{ item.tenure }}</td>
+				</tr>
+			</table>
+			<div class="text-center">
+				<pagination-controls
+					class="pagination"
+					(pageChange)="page = $event"
+					id="1"
+					maxSize="5"
+					directionLinks="true"
+					autoHide="false">
+				</pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>

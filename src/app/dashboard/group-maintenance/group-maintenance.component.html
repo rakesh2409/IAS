@@ -1,0 +1,26 @@
+<app-toolbar></app-toolbar>
+<app-error [errorMsg] = "error" [successMsg]="successMsg" [infoMsg] = "infoMsg"></app-error>
+<div class="custom-container" >
+<!-- <app-toolbar addApiUrl='hello' saveApiUrl='save' deleteApiUrl='delete'></app-toolbar> -->
+<app-module-heading moduleHeading="Group Maintenance"></app-module-heading>
+
+<div class="container" >
+  <br><br>
+  <ul class="nav nav-tabs" >
+    <li class="active" (click)="setActiveTab('profiles')"><a data-toggle="tab" href="#home">Profiles</a></li>
+    <li (click)="setActiveTab('modules')"><a data-toggle="tab" href="#modules">Modules</a></li>
+    <li (click)="setActiveTab('entitlements')"><a data-toggle="tab" href="#entitlement">Entitlement</a></li>
+  </ul>
+
+  <div class="tab-content" style="border-bottom: 1px solid #c1ccd1; border-left: 1px solid #c1ccd1; border-right:1px solid #c1ccd1">
+    <div id="home" class="tab-pane fade in active">
+      <app-profiles-tab [profiles] = "profiles" [modules] = "modules"></app-profiles-tab>
+    </div>
+    <div id="modules" class="tab-pane fade">
+      <app-modules-tab [profiles] = "profiles" [disableRecords]="disableRecords" [hideApprove]="hideApprove" [modules] = "modules"></app-modules-tab>
+    </div>
+    <div id="entitlement" class="tab-pane fade">
+      <app-entitlements-tab  [modules] = "modules" [moduleEntitlementList]="moduleEntitlementList" [entitlements]="entitlements" [usergroupId]="usergroupId" [disableRecords]="disableRecords" [hideApprove]="hideApprove"></app-entitlements-tab>
+    </div>
+  </div>
+</div>

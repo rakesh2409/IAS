@@ -1,0 +1,8 @@
+p.bg-info {
+  font-weight: bold;
+  color: #000000;
+  font-size: 14px;
+  background-color: #E8ECF1;
+  border-bottom: 1px solid #1E1E1E;
+  padding: 10px 15px;
+}

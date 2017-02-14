@@ -1,0 +1,59 @@
+<app-module-heading moduleHeading="Global Maker Queue"></app-module-heading>
+<div class="row">
+    <div class="col-sm-12"
+      style="font-weight: bold; color: #000000;
+      font-size: 14px;background-color:#E8ECF1;border-bottom:
+      1px solid #1E1E1E;padding: 10px 20px;">
+      Global Maker Queue
+    </div>
+</div>
+<div class="row">
+  		<div class="col-xs-12 col-sm-12">
+  		<table class="table table-bordered table-hover table-responsive">
+
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Creation Date</th>
+              <th>Creation Time</th>
+              <th>Checker Name</th>
+              <th>Status</th>
+              <th>Amend</th>
+            </tr>
+          </thead>
+          <tbody>
+          	  <tr *ngFor="let items of makerData | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setActiveRow(i)" [class.active]="i == activeRowIndex" >
+			      <td>{{items.userId}}</td>
+			      <td>{{items.makerUserName}}</td>
+			      <td>{{items.description}}</td>
+			      <td>{{items.createDtm}}</td>
+			      <td>{{items.version}}</td>
+			      <td>{{items.checkerUserName}}</td>
+			      <td>{{items.status}}</td>
+			      <td><a *ngIf="items.moduleName !== 'prod-maintenance'" href="javascript:void(0)" routerLink="/dashboard/{{items.moduleName}}/{{items.moduleId}}">
+			      		<span class="glyphicon glyphicon-edit"></span>
+			      	  </a>
+			      	  <a *ngIf="items.moduleName === 'prod-maintenance'" href="javascript:void(0)" routerLink="/dashboard/{{items.moduleName}}/product-additional-forms/{{items.moduleId}}/{{items.status}}/true">
+			      		<span class="glyphicon glyphicon-edit"></span>
+			      	  </a>
+
+			      </td>
+		      </tr>
+		      <tr *ngIf="makerData?.length <= 0"><td colspan="8">No items in the list</td></tr>
+          </tbody>
+        </table>
+  		</div>
+      <div class="text-center">
+				<pagination-controls
+					class="pagination"
+					(pageChange)="page = $event"
+					id="1"
+					maxSize="10"
+					directionLinks="true"
+					autoHide="false">
+				</pagination-controls>
+			</div>
+
+  </div>

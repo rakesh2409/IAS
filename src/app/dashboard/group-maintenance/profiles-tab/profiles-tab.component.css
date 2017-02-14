@@ -1,0 +1,33 @@
+
+legend.legendStyle {
+padding-left: 5px;
+padding-right: 5px;
+}
+fieldset.fsStyle {
+border: 1px solid #999999;
+padding: 4px;
+margin: 5px;
+}
+legend.legendStyle {
+color: #888888;
+background-color: transparent;
+}
+
+legend {
+width: auto;
+border-bottom: 0px;
+}
+.auto-scroll{
+	max-height: 300px;
+	overflow: auto;
+}
+
+.modal-height{
+height:120px;
+}
+
+
+
+.buttonWidth {
+	width:70px;
+}

@@ -1,0 +1,48 @@
+[
+        {
+            "name": "IAS-FAR-RET",
+            "sv_level": "",
+            "id": 1,
+            "creation_date": "",
+            "last_maintenance_date": "",
+            "approval_limit1": "",
+            "approval_limit2":""
+        },
+        {
+            "name": "IAS-FAR-AFL",
+            "sv_level": "",
+            "id": 2,
+            "creation_date": "",
+            "last_maintenance_date": "",
+            "approval_limit1": "",
+            "approval_limit2":""
+        },
+        {
+            "name": "IAS-FAS-RET-L1",
+            "sv_level": "",
+            "id": 3,
+            "creation_date": "",
+            "last_maintenance_date": "",
+            "approval_limit1": "",
+            "approval_limit2":""
+        },
+        {
+            "name": "IAS-FAS-RET-L2",
+            "sv_level": "",
+            "id": 4,
+            "creation_date": "",
+            "last_maintenance_date": "",
+            "approval_limit1": "",
+            "approval_limit2":""
+        },
+        {
+            "name": "IAS-FAS-RET-L3",
+            "sv_level": "",
+            "id": 5,
+            "creation_date": "",
+            "last_maintenance_date": "",
+            "approval_limit1": "",
+            "approval_limit2":""
+        }
+    ]
+ 

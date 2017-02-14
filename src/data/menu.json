@@ -1,0 +1,129 @@
+ { 
+     "menu": [
+        {
+            "title": "Search User/Group",
+            "className": "glyphicon glyphicon-search",
+            "submenu": [
+                {
+                    "title": "Search User/ID Name",
+                    "className": "",
+                    "link": "search-user"
+                },
+                {
+                    "title": "Search User Group",
+                    "className": "",
+                    "link": "search-group"
+                }
+            ]
+        },
+        {
+            "title": "Global Parameter Settings",
+            "className": "glyphicon glyphicon-cog",
+            "submenu": [
+                {
+                    "title": "Parameter Settings",
+                    "className": "",
+                    "link": "param-setting"
+                },
+                {
+                    "title": "Vulnerable Triggers",
+                    "className": "",
+                    "link": "vuln-triggers"
+                },
+                {
+                    "title": "Supervisor Approval",
+                    "className": "",
+                    "link": "sv-approval"
+                },
+                {
+                    "title": "Global Parm Maker Queue",
+                    "className": "",
+                    "link": "global-param-maker"
+                },
+                {
+                    "title": "Global Parm Checker Queue",
+                    "className": "",
+                    "link": "global-param-checker"
+                }
+            ]
+        },
+        {
+            "title": "User Access Maintenance",
+            "className": "glyphicon glyphicon-user",
+            "submenu": [
+                {
+                    "title": "Group Maintenance",
+                    "className": "",
+                    "link": "group-maintenance"
+                },
+                {
+                    "title": "User Maintenance",
+                    "className": "",
+                    "link": "user-maintenance"
+                },
+                {
+                    "title": "User Access Maker Queue",
+                    "className": "",
+                    "link": "useraccess-maker"
+                },
+                {
+                    "title": "User Access Checker Queue",
+                    "className": "",
+                    "link": "useraccess-checker"
+                }
+            ]
+        },
+        {
+            "title": "Product Library",
+            "className": "glyphicon glyphicon-folder-close",
+            "submenu": [
+                {
+                    "title": "Product Maintenance",
+                    "className": "",
+                    "link": "prod-maintenance"
+                },
+                {
+                    "title": "Benefits and Limitations",
+                    "className": "",
+                    "link": "benefits-limit"
+                },
+                {
+                    "title": "Product Maintenance Maker Queue",
+                    "className": "",
+                    "link": "prod-maintenance-maker"
+                },
+                {
+                    "title": "Product Maintenance Checker Queue",
+                    "className": "",
+                    "link": "prod-maintenance-checker"
+                }
+            ]
+        },
+        {
+            "title": "Holiday Table",
+            "className": "glyphicon glyphicon-calendar",
+            "submenu": [
+                {
+                    "title": "Holiday Table Maintenance",
+                    "className": "",
+                    "link": "holiday-maintenance"
+                },
+                {
+                    "title": "Holiday Table Maker Queue",
+                    "className": "",
+                    "link": "holiday-maker"
+                },
+                {
+                    "title": "Holiday Table Checker Queue",
+                    "className": "",
+                    "link": "holiday-checker"
+                }
+            ]
+        },
+        {
+            "title": "Reports",
+            "className": "glyphicon glyphicon-folder-open",
+            "link": "reports"
+        }
+    ]
+ }

@@ -1,0 +1,67 @@
+<app-module-heading moduleHeading="Global Checker Queue"></app-module-heading>
+<div class="row">
+    <div class="col-sm-12"
+      style="font-weight: bold; color: #000000;
+      font-size: 14px;background-color:#E8ECF1;border-bottom:
+      1px solid #1E1E1E;padding: 10px 20px;">
+      Global Checker Queue
+    </div>
+</div>
+<app-error [errorMsg] = "error" [successMsg]="successMsg" [infoMsg] = "infoMsg"></app-error>
+<div class="row">
+  		<div class="col-xs-12 col-sm-12">
+  		<table class="table table-bordered table-hover table-responsive">
+
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Creation Date</th>
+              <th>Creation Time</th>
+              <th>Checker Name</th>
+              <th>Status</th>
+              <th>View</th>
+             <!--  <th>Approve</th>
+              <th>Reject</th> -->
+            </tr>
+          </thead>
+          <tbody>
+          	  <tr *ngFor="let items of checkerData | paginate: {itemsPerPage: 10, currentPage:page, id: '1'}; let i = index" (click)="setActiveRow(i)" [class.active]="i == activeRowIndex" >
+			      <td>{{items.userId}}</td>
+			      <td>{{items.makerUserName}}</td>
+			      <td>{{items.description}}</td>
+			      <td>{{items.createDtm}}</td>
+			      <td>{{items.version}}</td>
+			      <td>{{items.checkerUserName}}</td>
+			      <td>{{items.status}}</td>
+			      <td><a *ngIf="items.moduleName !== 'prod-maintenance'" href="javascript:void(0)" routerLink="/dashboard/{{items.moduleName}}/{{items.moduleId}}">
+			      		<span class="glyphicon glyphicon-th-list"></span></a>
+
+			      		<a *ngIf="items.moduleName === 'prod-maintenance'" href="javascript:void(0)" routerLink="/dashboard/{{items.moduleName}}/product-additional-forms/{{items.moduleId}}/{{items.status}}/true">
+			      		<span class="glyphicon glyphicon-th-list"></span>
+			      	  </a>
+			      </td>
+			      <!-- <td><a href="javascript:void(0)" class="approve" (click)="updateRequestStatus('APPROVED',items.moduleId, items.makerUserName, items.moduleName)">
+			      		<span class="glyphicon glyphicon-ok"></span></a></td>
+			      <td><a href="javascript:void(0)" class="reject" (click)="updateRequestStatus('REJECTED',items.moduleId, items.makerUserName, items.moduleName)">
+			      		<span class="glyphicon glyphicon-remove"></span></a></td> -->
+		      </tr>
+		      <tr *ngIf="checkerData?.length <= 0">
+		      	 <td colspan="10">No items in the list</td>
+		      </tr>
+          </tbody>
+        </table>
+  		</div>
+      <div class="text-center">
+				<pagination-controls
+					class="pagination"
+					(pageChange)="page = $event"
+					id="1"
+					maxSize="10"
+					directionLinks="true"
+					autoHide="false">
+				</pagination-controls>
+			</div>
+
+  </div>

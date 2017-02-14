@@ -1,0 +1,81 @@
+
+<form class="form-inline">
+  <div class="row">
+    <!-- Modules table -->
+    <div class="col-xs-3 col-sm-3">
+    	
+    	<div class="col-xs-12 col-sm-12 text-center well">
+    		<b>Profile Name</b>
+    	</div>
+    	<div class="col-xs-12 col-sm-12 no-padding">
+	        <table class="table table-bordered table-responsive table-hover">
+	          <tbody>
+	            <tr *ngFor="let item of profiles ; let i = index" (click)="setClickedRowProfile(i)" [class.active]="i == selectedRowProfile">
+	              <td (click)="getModulesByProfileId(item.usergroupId)">{{item.usergroupName}}</td>
+	            </tr>
+	          </tbody>
+	        </table>
+	    </div>
+    </div>
+    <!-- Available Modules  -->
+    <div class="col-xs-4 col-sm-4">
+        <div class="col-xs-12 col-sm-12 text-center well">
+    		<b>Available Module</b>
+    	</div>
+    	<div class="col-xs-12 col-sm-12 no-padding">
+	        <table class="table table-bordered table-responsive table-hover" >
+	          <tbody>
+	            <tr *ngFor="let item of modules; let i = index" (click)="setClickedRowModule(i)" [class.active]="i == selectedRowModule">
+	              <td *ngIf="!item.availableModule" (click)="holdValue(item.moduleId)">{{item.moduleName}}</td>
+	            </tr>
+	          </tbody>
+	        </table>
+	    </div>
+    </div>
+
+    <div class="col-xs-1 col-sm-1 glyph-container">
+      <div class="container">
+        <div class="row row-centered">
+              <div class="col-xs-12 col-centered">
+                <span class="glyphicon glyphicon-chevron-left"
+                	(click)="modifyModules('REM_ASSIGNED')" [ngClass]="{'spandisabled': disableRecords }" ></span>
+              </div>
+              <div class="col-xs-12 col-centered">
+                <span class="glyphicon glyphicon-forward"
+                	(click)="modifyModules('ASSIGN_ALL')" [ngClass]="{'spandisabled': disableRecords }"></span>
+              </div>
+              <div class="col-xs-12 col-centered">
+                <span class="glyphicon glyphicon-backward"
+                	(click)="modifyModules('REM_ALL_ASSIGNED')" [ngClass]="{'spandisabled': disableRecords }"></span>
+              </div>
+              <div class="col-xs-12 col-centered">
+                <span class="glyphicon glyphicon-chevron-right"
+                	(click)="modifyModules('ASSIGN')" [ngClass]="{'spandisabled': disableRecords }"></span>
+              </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Assigned Module  -->
+    <div class="col-xs-4 col-sm-4">
+        <div class="col-xs-12 col-sm-12 text-center well">
+    		<b>Assigned Module</b>
+    	</div>
+    	<div class="col-xs-12 col-sm-12 no-padding">
+	        <table class="table table-bordered table-responsive table-hover" >
+	          <tbody>
+	            <tr *ngFor="let item of modules; let i = index" (click)="setClickedRowModule(i)" [class.active]="i == selectedRowModule">
+	              <td *ngIf="item.availableModule" (click)="holdValue(item.moduleId)">{{item.moduleName}}</td>
+	            </tr>
+	          </tbody>
+	        </table>
+	    </div>
+    </div>
+    
+    <!--  <div class="col-xs-12 col-sm-12">
+    	<br>
+    	<button type="button" class="c btn btn-primary pull-right" (click) = "saveChanges()">Save</button>
+    </div>-->
+    
+  </div>
+</form>

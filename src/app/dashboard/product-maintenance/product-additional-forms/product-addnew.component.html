@@ -1,0 +1,2847 @@
+<div class="container-fluid">
+	<app-error [errorMsg]="error" [successMsg]="successMsg" [infoMsg]="infoMsg"></app-error>
+	<form class="form-inline">
+		<div class="row">
+			<div class="col-xs-7 col-sm-7">
+				<div class="row">
+					<div class="container">
+						<label class="col-xs-2 col-sm-2 control-label">Product
+							Type Indicator<span class="color">*</span> 
+						</label>
+						<div>
+							<fieldset [disabled]="EditDisable ==='true'">
+								<select class="form-control" required [(ngModel)]="newProductType" name="newProductType" (change)="onChangeProductType(newProductType)"
+									#productType>
+									<option *ngFor="let singlePoductType of productTypeArray" value="{{ singlePoductType.descCode }}" >{{singlePoductType.description}}</option>
+								</select>
+							</fieldset>
+							<!--<div class="col-xs-8 col-sm-12 form-group">
+								<button (click)="goBack()" class="btn btn-warning btn-primary pull-right">Back</button></div>-->
+							<div class="col-xs-8 col-sm-12 form-group">
+								<button (click)="clearFields()" class="btn btn-warning btn-primary pull-right">Reset</button></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<hr style="width: 100%; color: #8B8B8B; height: 1px; background-color: #8B8B8B;" />
+	<fieldset [disabled]= "globalDisableField === 'true'"  >
+	<form (ngSubmit)="f.form.valid && submitForm()" #f="ngForm" >
+		<div class="row" *ngIf="newProductType==='UT'" >
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input [(ngModel)]="productModel.productProvider" [disabled]="EditDisable" name="productProvider" type="text" class="form-control"
+									#utProductPriovider id="utProductPriovider" placeholder="" required />
+							</div>
+
+							<!--<label class="col-sm-2">Annual Product</label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" #utAnnulaProd id="utAnnulaProd" placeholder="" />
+							</div>-->
+							<label class="col-sm-2">CPFSRS Approved</label>
+							<div class="col-sm-2">
+								<select class="form-control"  [(ngModel)]="productModel.utProduct.cpfSrsApproveInd" name="utCpFSRS"
+									#utCpFSRS class="form-control" #utCpfsrApproved id="utCpfsrApproved" placeholder="">
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">CIP Product Flag<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.cipInd" name="utCipProdFlg" #utCipProdFlg
+									required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId" [disabled]="EditDisable" name="productId" class="form-control" #utProductId maxlength=10
+									id="utProductId" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Sector</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.utProduct.sectorVal" [disabled]="EditDisable" name="utSector" #utSector
+									(change)="onChangeSectorType(productModel.utProduct.sectorVal)">
+									<option *ngFor="let sector of sectorTypeArray"  value="{{sector.descCode}}" >{{sector.description}}</option>
+								</select>
+							</div>
+							<label class="col-sm-2">CPFSA Approved<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.cpfSaApproveInd" name="utCPFSAApproved"
+									#utCPFSAApproved required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="utProdName" [disabled]="EditDisable" class="form-control"
+									#utProductName id="utProductName" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Latest Fund Price<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" class="form-control" [(ngModel)]="productModel.utProduct.latestFundPrice" #utLatestFundPrice
+									name="fundPrice" id="utLatestFundPrice" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">CPFOA Approved<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.cpfOaApproveInd" required name="utCPFOAApproved"
+									#utCPFOAApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="currency" [disabled]="EditDisable" class="form-control" #utCurreny id="utCurreny" placeholder=""
+									required />
+							</div>
+
+							<label class="col-sm-2">Min Initial Subscription Amt<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.minIniSubAmt" name="minIniSubAmt" class="form-control" #utMinInitSubAmt
+									id="utMinInitSubAmt" placeholder="" required />
+							</div>
+							<label class="col-sm-2">Dividend Type</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.utProduct.divTypeVal" [disabled]="EditDisable" name="utDividentType"
+									#utDividentType (change)="onChangeDividendType(productModel.utProduct.divTypeVal)">
+									<option *ngFor="let dividend of dividendTypeArray" value="{{dividend.descCode}}">{{dividend.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">ISIN Code</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.isinCode" [disabled]="EditDisable" name="isinCode" class="form-control"
+									#utIsInCode id="utIsInCode" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Min Subsequent Subscription Amt<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.minSubsequentSubAmt" [disabled]="EditDisable" name="MinSubSubAmt"
+									class="form-control" #utMinSubsequentSubAmt id="utMinSubsequentSubAmt" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Cooling Period<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.coolingPeriod" [disabled]="EditDisable" name="coolingPeriod" class="form-control"
+									#utCoolingPeriod id="utCoolingPeriod" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<!--<div class="row">     
+						<div class="col-sm-12">
+							<label class="col-sm-2">CPFSRS Approved</label>
+							<div class="col-sm-2">
+								<input type="text" value="" class="form-control" #utCpfsrApproved id="utCpfsrApproved" placeholder="" />
+							</div>
+							<label class="col-sm-2">Dividend Type</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="utDividentType" #utDividentType (change)="onChangeDividendType(utDividentType.value)">
+									<option *ngFor="let dividend of dividendTypeArray">{{dividend.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>-->
+				</fieldset>
+			</div>
+
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12 form-group">
+							<label class="col-sm-2">Client Segment<span class="color" >*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox" name="utRetail"  [(ngModel)]="productModel.prodRetailInd" 
+									>Retail</label> <label class="checkbox-inline"><input
+									type="checkbox" [(ngModel)]="productModel.prodPremierInd" name="utPremier">Premier</label>
+
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox"  [(ngModel)]="productModel.prodPrivateInd"
+									name="utPrivate">Private</label>
+							</div>
+							<label class="col-sm-2 form-group">Tenure
+								<span class="color">*</span>
+							</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tenure" name="tenure" required class="form-control" #utTenure id="utTenure"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="utProdStatus" #utProdStatus
+									(change)="onChangeProductStatus(utProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+
+								<select class="form-control" [(ngModel)]="productModel.productStatus" name="utProdStatus" #utProdStatus required>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+
+							</div>
+
+							<label class="col-sm-2">Premium Type</label>
+							<div class="col-sm-2">
+								<select class="form-control"  [(ngModel)]="productModel.premiumType" name="utPremiumType" #utPremiumType
+									(change)="onChangePremiumType(productModel.premiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray" value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+								<!--<select class="form-control" [(ngModel)]="userModel.userGroupName" name="groupName" (change)="mapUserGroup(userModel.userGroupName)" required>
+	            		<option *ngFor="let item of profiles" value="{{item.usergroupName}}">{{item.usergroupName}}</option>
+	            	</select>-->
+
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.aiProductInd" name="utAiState" #utAiState required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" required name="utRiskRateType" #utRiskRateType required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+				</fieldset>
+			</div><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" required [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="utSafeYourWealth" #utSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="utEducation" #utEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="utMortgage" required #utMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option> 
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="utEnhanceYourHealth" #utEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="utProtUponDeath" #utProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="utCoverlossIncome" #utCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="utGenerateIncome" #utGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="utProtUponTpd" #utProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="utColdAgeDisabilities"
+									#utColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="utLegacy" #utLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="utProtUponCritIlleness"
+									#utProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="utHouseView" #utHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.retirementInd" required name="utRetirement" #utRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.hospProInd" required name="utHospitalization" #utHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Minimum Holding Units<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.minHoldUnits" name="MinHoldunit" class="form-control"
+									#utMinholdUnit id="utMinholdUnit" placeholder="" required />
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Other Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Prohibited Country</label>
+							<div class="col-sm-1">
+								<select class="form-control" name="utDefaultCountry" #utDefaultCountry (change)="onChangeOfDefaultCountryType(utDefaultCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+							</div>
+
+							<div class="col-sm-1">
+								<select class="form-control" name="utCountryList" #utCountryList (click)="onClickCountryType(utCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+
+							<label class="col-sm-1">Offer Start Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.offerStartDt" name="offStartDt" class="form-control"
+									#utOffStartDate id="utOffStartDate" placeholder="" />
+							</div>
+							<!--<label class="col-sm-2">Capital Exposure</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="utCapiExp" #utCapiExp>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>-->
+							<label class="col-sm-2">Capital Exposure</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.utProduct.capExposureVal" name="utCapitalExposure" #utCapitalExposure
+									(change)="onChangeCapitalExposureType(productModel.utProduct.capExposureVal)">
+									<option *ngFor="let capitalExposure of capitalExposureTypeArray"  value="{{capitalExposure.descCode}}">{{capitalExposure.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.minEntryAge" name="minEntryage" class="form-control"
+									#utMinEntryAge id="utMinEntryAge" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Offer End Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.offerEndDt" name="offerEndDt" class="form-control"
+									#utOffEndDate id="utOffEndDate" placeholder="" />
+							</div>
+							<label class="col-sm-2">Last Date for Subscription</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.lastSubDt" name="lastDateSub" class="form-control"
+									#utLastDateSubDate id="utLastDateSubDate" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.maxEntryAge" name="maxEntryAge" class="form-control"
+									#utMaxEntryAge id="utMaxEntryAge" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" name="ut7DayCollect" required #ut7DayCollect>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">MP Asset Class</label>
+							<div class="col-sm-2">
+								<!--<input type="text" [(ngModel)]="productModel.utProduct.utFundCategoryCd" name="mpAsset" class="form-control" #utMpAssetCla
+									id="utMpAssetCla" placeholder="" />-->
+									<select class="form-control"  [(ngModel)]="productModel.utProduct.mpAssetClassVal" name="mpAsset" #mpAsset
+									 (change)="onChangeMpAssetClass(productModel.utProduct.mpAssetClassVal)">
+									<option *ngFor="let assetType of mpAssetClassTypeArray" value="{{assetType.descCode}}">{{assetType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<br>
+					
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Fund Type<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.fundType" name="utFundType" #utFundType
+									required (change)="onChangeFundType(productModel.utProduct.fundType)">
+									<option *ngFor="let fundType of fundTypeTypeArray" value="{{fundType.descCode}}">{{fundType.description}}</option>
+								</select>
+
+							</div>
+
+							<label class="col-sm-2">Switching Fee<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" name="switFee" [(ngModel)]="productModel.utProduct.switchingFeePer" class="form-control"
+									#utSwitchingfee id="utSwitchingfee" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Latest Trade Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.latestTradeDt"  name="LateTrDt" class="form-control"
+									#utLatestTradeDate id="utLatestTradeDate" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Fund Category</label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.utFundCategoryVal" name="utFundCategory"
+									#utFundCategory (change)="onChangeFundCategoryType(productModel.utProduct.utFundCategoryVal)">
+									<option *ngFor="let fundTypeCategory of fundCategoryTypeArray" value="{{fundTypeCategory.descCode}}" >{{fundTypeCategory.description}}</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Trailer Fee<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" name="TrailerFee" [(ngModel)]="productModel.utProduct.trailerFeePer" class="form-control"
+									#utTrailerFee id="utTrailerFee" placeholder="" required/>
+							</div>
+
+							<label class="col-sm-2">Fund Tenure Start Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" name="fundTenureDt" [(ngModel)]="productModel.utProduct.tenureStartDt" class="form-control"
+									#utFundTenureStartDate id="utFundTenureStartDate" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Annual Payout<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.annualPayoutInd" name="utAnnPayout"
+									required #utAnnPayout>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Min Hloding Units</label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.minHoldUnits" name="minHoldUni" class="form-control"
+									#utMinHoldingUnit id="utMinHoldingUnit" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Tenure End Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.tenureEndDt" name="FundTenureEndDt" class="form-control"
+									#utFundTenureEndDate id="utFundTenureEndDate" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Annual Report URL</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.annRepUrl" name="AnnaualRpt" class="form-control" #utAnnReportURL
+									id="utAnnReportURL" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Front End Load(FEL)<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.frontEndLoadVal" name="FelID" class="form-control"
+									#utFEL id="utFEL" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Latest Quotation Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.latestQuotationDt" name="QuotationDt" class="form-control"
+									#utLatestQD id="utLatestQD" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Semi Annual URL</label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.semAnnRepUrl" name="semiAnnURL" class="form-control"
+									#utSemiAnnURL id="utSemiAnnURL" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">FEL(Staff Discount)<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.frontEndLoadDisStaffVal" name="StafDis" class="form-control"
+									#utFEL id="utFEL" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Latest Subscription Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.lastSubDt" name="lateStaff" class="form-control"
+									#utLSD id="utLSD" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Fund Manager ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.fundMgrId" name="fundMnId" class="form-control"
+									required #utFundMgrID id="utFundMgrID" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">MBB Commission(NOM FEL)</label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.mbbCommVal" name="mbbFel" class="form-control"
+									#utMBBCom id="utMBBCom" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Fund Creation Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" required [(ngModel)]="productModel.utProduct.fundCreationDate" name="fundCreationDt"
+									class="form-control" #utFundCreationDate id="utFundCreationDate" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Investment Type<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.investmentTypeVal" name="invType" class="form-control"
+									#utInvestType id="utInvestType" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Close Offer Price</label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.closeOfferPrice" name="closeOff" value=""
+									class="form-control" #utCloseOffPri id="utCloseOffPri" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Fund Last Update Date</label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.fundLastUpdateDate" name="fundLastDt" class="form-control"
+									required #utFundLUD id="utFundLUD" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Price Indicator<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.priceInd" name="priceInd" class="form-control"
+									#utPriceInd id="utPriceInd" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">IB Discount</label>
+							<div class="col-sm-2">
+								<input type="text" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.ibDisVal" name="IBDis" class="form-control"
+									#utIbDis id="utIbDis" placeholder="" />
+							</div>
+							<label class="col-sm-2">Distribute to Private Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.disPriWealthInd" name="utDisToPriWealth"
+									required #utDisToPriWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option> 
+								</select>
+							</div>
+							<!--<label class="col-sm-2">Capital Exposure</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="utCapitalExposure" #utCapitalExposure (change)="onChangeCapitalExposureType(utCapitalExposure.value)">
+									<option *ngFor="let capitalExposure of capitalExposureTypeArray">{{capitalExposure.description}}</option>
+								</select>
+							</div>-->
+						</div>
+					</div><br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Creation Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.creationDt" name="proCreDt" class="form-control" #utProductCreateDate
+									id="utProductCreateDate" placeholder="" required />
+							</div>
+							<label class="col-sm-2">Product Last Update Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.productLastUpdateDt" name="prodLatDt" class="form-control"
+									#utProductLastDate id="utProductLastDate" placeholder="" required />
+							</div>
+							<label class="col-sm-2">Distribute to IB<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.disIntBankInd" required name="disIB"
+									#utDisToIB>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Distribute to Retail Banking<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.disRetBankInd" name="DisRetBank"
+									required #utDisToRetail>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Distribute to Premier Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.utProduct.disPreWealthInd" name="utDisToPremWealth"
+									#utDisToPremWealth required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+                             <label class="col-sm-2">Min Initial Subscription Amount<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.utProduct.minIniSubAmt" name="minIniSubAmt" [disabled]="EditDisable" class="form-control"
+									#sdMinInitSubAmount id="utMinInitSubAmount" placeholder="" required />
+							</div>
+
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea [(ngModel)]="productModel.benFeature" name="benifit" class="form-control custom-control" required rows="3" id="utBenifit"
+										#utBenifit style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" [(ngModel)]="productModel.limitationsRisks" name="limit" required rows="3"
+										id="utLimAndRisk" #utLimAndRisk style="resize: none"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<button #submitButton type="submit" class="hidden btn-warning pull-right">Submit</button>
+	</form><br>
+	<form>
+		<div class="row" *ngIf="newProductType==='SD'">
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input [(ngModel)]="productModel.productProvider" [disabled]="EditDisable" name="sdProductProvider" type="text" class="form-control"
+									#sdProductProvider id="sdProductProvider" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">SD Interest Term</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.interestTerm" [disabled]="EditDisable" name="sdInterest" class="form-control" #sdInterestTerm
+									id="sdInterestTerm" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">DCI Deal Start Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.sdProduct.dealStartDt" name="dealStartDate" [disabled]="EditDisable" class="form-control"
+									#sdDealStartDt id="sdDealStartDt" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="sdProductId" class="form-control" maxlength=10
+									#sdProductId id="sdProductId" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">SD Interest Term Code</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.interestTermCode" [disabled]="EditDisable" class="form-control" #sdInterestTemCode maxlength=2
+									id="sdInterestTemCode" name="sdIntCode" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Deal End Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.sdProduct.dealEndDt" name="dealEndDate" class="form-control"
+									#sdDelEndDt id="sdDelEndDt" placeholder="" required/>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="sdProductName" [disabled]="EditDisable" class="form-control"
+									#utProductName id="sdProductName" placeholder="" required />
+							</div>
+							<div class="col-sm-4"></div>
+							<label class="col-sm-2">Coupon Start Date</label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.sdProduct.couponStartDate" name="couponStartDate" class="form-control" #sdCouponStDt
+									id="sdCouponStDt" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="currency"  value="" class="form-control" required
+									#sdCurrency id="sdCurrency" placeholder="" />
+							</div>
+							<div class="col-sm-4"></div>
+							<label class="col-sm-2">Coupon End Date</label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.sdProduct.couponStartDate" name="couponEndDate" class="form-control" #sdCouponEndDt
+									id="sdCouponEndDt" placeholder="" />
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Client Segment<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox" [(ngModel)]="productModel.prodRetailInd" required
+									name="sdRetail">Retail</label> <label class="checkbox-inline"><input [(ngModel)]="productModel.prodPremierInd"
+									type="checkbox" name="sdPremier">Premier</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox" [(ngModel)]="productModel.prodPrivateInd"
+									name="sdPrivate">Private</label>
+							</div>
+							<label class="col-sm-2">Tenure<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tenure" name="tenure" class="form-control" required #sdTenure id="sdTenure"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="sdProdStatus" #sdProdStatus
+									(change)="onChangeProductStatus(utProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+								<select class="form-control" [(ngModel)]="productModel.productStatus" required name="sdProdStatus" #sdProdStatus>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Premium Type</label>
+							<div class="col-sm-2">
+								<select class="form-control"  [(ngModel)]="productModel.premiumType" name="sdPremiumType" #sdPremiumType
+									(change)="onChangePremiumType(productModel.premiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray" value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.aiProductInd" required name="sdAiStatus" #sdAiStatus>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" name="sdRiskRate" #sdRiskRate required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="sdSafeYourWealth" #sdSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="sdEducation" #sdEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="sdMortgage" #sdMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="sdEnhanceYourHealth" #sdEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="sdProtUponDeath" #sdProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="sdCoverlossIncome" #sdCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="sdGenerateIncome" #sdGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="sdProtUponTpd" #sdProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="sdColdAgeDisabilities"
+									#sdColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="sdLegacy" #sdLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="sdProtUponCritIlleness" #sdProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="sdHouseView" #sdHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.retirementInd" required name="utRetirement" #sdRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.hospProInd" required name="sdHospitalization" #sdHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Min Initial Subscription Amount<span class="color">*</span><span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.minIniSubAmt" name="minIniSubAmt" [disabled]="EditDisable" class="form-control"
+									#sdMinInitSubAmount id="sdMinInitSubAmount" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Maximum Subscription Amount<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.maxSubAmt" name="maxIniSubAmt" class="form-control" #sdMaxSubAmount
+									id="sdMaxSubAmount" placeholder="" required />
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Other Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Prohibitted Country</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="sdProhibittedCountry" #utDefaultCountry (change)="onChangeOfDefaultCountryType(sdProhibittedCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList" value="{{defaultCountry.descCode}}">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+
+							</div>
+							<div class="col-sm-2">
+								<select class="form-control" name="sdCountryList" #sdCountryList (click)="onClickCountryType(sdCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Offer Start Date<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.sdProduct.offerStartDt" name="offerStartDate" class="form-control" #sdOffStartDt required
+									id="sdOffStartDt" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Offer End Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.sdProduct.offerEndDt" required name="offerEndDate" class="form-control" #sdOffEndDt id="sdOffStartDt"
+									placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Min Subscription Amount<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.minIniSubAmt" name="MinSubAmt" class="form-control" #sdMinSubAmt id="sdMinSubAmt"
+									required placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Max Subscription Amount<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.sdProduct.maxSubAmt" name="maxSubAmt" class="form-control" #sdMaxSubAmt id="sdMaxSubAmt"
+									required placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" required name="sd7DayCan" #sd7DayCan>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.minEntryAge" name="minEntryAge" class="form-control" #sdMinEntryAge id="sdMinEntryAge"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.maxEntryAge" name="maxEntryAge" class="form-control" #sdMaxEntryAge id="sdMaxEntryAge"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" [(ngModel)]="productModel.benFeature" name="benifitFea" rows="3" id="sdBenifit"
+										required #sdBenifit style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" [(ngModel)]="productModel.limitationsRisks" name="limiRisk" rows="3" id="sdLimit"
+										required style="resize: none"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+	<form>
+		<div class="row" *ngIf="newProductType==='INS'">
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productProvider" [disabled]="EditDisable" name="insProductProvider" class="form-control"
+									#insProductProvider id="insProductProvider" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Insurance Type<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.insProduct.insType" name="insuType" #insType required
+									 (change)="onChangeInsuranceType(productModel.insProduct.insType)">
+									<option *ngFor="let insuranceType of insuranceTypeArray"  value="{{insuranceType.descCode}}" >{{insuranceType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId" [disabled]="EditDisable" name="insProductId" class="form-control" maxlength=10
+									#insProductId required id="insProductId" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">CPFCA Approved</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.cpfsaApproveInd" name="insCPFCAApproved" #insCPFCAApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="insProductName" [disabled]="EditDisable" class="form-control"
+									#insProductName id="insProductName" placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Insurance Category</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.insCategory" [disabled]="EditDisable" name="insCategory"
+									(change)="onChangeInsuranceCategoryType(productModel.insProduct.insCategory)" #insCategory>
+							<option *ngFor="let insCategory of insuranceCategoryTypeArray" value="{{insCategory.descCode}}" >{{insCategory.description}}</option>
+						</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Renewal Flag<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.insRenewalFlg" [disabled]="EditDisable" name="insRecentFlg"
+									#insRecentFlg required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">CPFOA Approved<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.cpfoaApproveInd" [disabled]="EditDisable" name="insCategory"
+									required #insCategory>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Company Code<span class="color">*</span></label>
+
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.companyCode" [disabled]="EditDisable" name="insCpfsrsApproved"
+									required #insCpfsrsApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+
+							</div>
+							<label class="col-sm-2">Company Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.companyName" [disabled]="EditDisable" name="insCpfsrsApproved"
+									required #insCpfsrsApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Insurance Product Code<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.insProduct.insProdCode" name="insCpfsrsApproved"
+									#insCpfsrsApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">CPFSA Approved<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [disabled]="EditDisable" [(ngModel)]="productModel.insProduct.cpfsaApproveInd" name="insCPFSAApproved"
+									#insCPFSAApproved required>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">CPFSRS Approved<span class="color">*</span></label>
+
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.cpfsrsApproveInd" name="insCpfsrsApproved" #insCpfsrsApproved>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Client Segment<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox"  [(ngModel)]="productModel.prodRetailInd" required
+									name="insRetail">Retail</label> <label class="checkbox-inline"><input  [(ngModel)]="productModel.prodPremierInd" 
+									type="checkbox" name="insPremier">Premier</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox" [(ngModel)]="productModel.prodPrivateInd" 
+									name="insPrivate">Private</label>
+							</div>
+							<label class="col-sm-2">Tenure<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tenure" class="form-control" required name="insTenure" #insTenure id="insTenure"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="insProdStatus" #insProdStatus
+									(change)="onChangeProductStatus(insProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+
+								<select class="form-control" [(ngModel)]="productModel.productStatus" required name="insAiStatus" #insAiStatus>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+
+							</div>
+
+							<label class="col-sm-2">Premium Type<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.insPremiumType" name="insPremiumType" required #insPremiumType
+									(change)="onChangePremiumType(productModel.insProduct.insPremiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray"  value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.aiProductInd" required name="insAiStatus" #insAiStatus>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" required name="insRiskRate" #insRiskRate required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="insSafeYourWealth"
+									#insSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="insEducation" #insEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="insMortgage" #insMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="insEnhanceYourHealth" #insEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="insProtUponDeath" #insProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="insCoverlossIncome" #utCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="insGenerateIncome" #insGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="utProtUponTpd" #insProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="insColdAgeDisabilities"
+									#insColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="insLegacy" #insLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="insProtUponCritIlleness" #insProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="insHouseView" #insHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.retirementInd" required name="insRetirement" #insRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.hospProInd" required name="insHospitalization" #insHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+			<br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Other Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Prohibitted Country</label>
+							<div class="col-sm-1">
+								<select class="form-control" name="insProhibitedCountry" #insProhibitedCountry (change)="onChangeOfDefaultCountryType(insProhibitedCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList" value="{{defaultCountry.descCode}}">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+							</div>
+							<div class="col-sm-1">
+								<select class="form-control" name="insCountryList" #insCountryList (click)="onClickCountryType(insCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+
+							<label class="col-sm-1">Policy Limits(Min)<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.insProduct.minPolicyAmount" name="insPolicylimin" class="form-control" #insPolicylim
+									required id="insPolicylimin" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="incurrency" class="form-control" #insCurrency id="insCurrency"
+									placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Policy Limits(Max)<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.insProduct.maxPolicyAmount" name="insPolicylimax" class="form-control" #insPolicylim
+									id="insPolicylimax" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">GIO<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.insProduct.gioInd" required name="insGIO" #insGIO (change)="onChangeInsuranceGIOType(productModel.insProduct.gioInd)">
+									<option *ngFor="let gioType of insuranceGIOTypeArray" value="{{gioType.descCode}}">{{gioType.description}}</option>
+								</select>
+							</div>
+							<!--<label class="col-sm-2">Min Premium Limits(Annual)</label>
+							<div class="col-sm-2">
+								<input type="text" value="" class="form-control" #insMinPreLim id="insMinPreLim" placeholder="" />
+							</div>-->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.minEntryAge" name="minentry" class="form-control" #insMinEntryAge id="insMinEntryAge"
+									placeholder="" required />
+							</div>
+							<!--<label class="col-sm-2 text-right">Min Premium
+								Limits(Half yearly)</label>
+							<div class="col-sm-2">
+								<input type="text" value="" class="form-control" #insMinPreHalf id="insMinPreHalf" placeholder="" />
+							</div>-->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.maxEntryAge" name="maxEntry" class="form-control" #insMaxEntryAge id="insMaxEntryAge"
+									placeholder="" required />
+							</div>
+							<!--<label class="col-sm-2 text-right">Min Premium
+								Limits(Quarterly)</label>
+							<div class="col-sm-2">
+								<input type="text" value="" class="form-control" #insLimQuart id="insLimQuart" placeholder="" />
+							</div>-->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Creation Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [disabled]="EditDisable" [(ngModel)]="productModel.insProduct.productCreationDt" class="form-control" #insProductCreateDate
+									id="insProductCreateDate" name="prodCreationdate" placeholder="" required />
+							</div>
+							<!--<label class="col-sm-2 text-right">Min Premium
+								Limits(Monthly)</label>
+							<div class="col-sm-2">
+								<input type="text" value="" class="form-control" #insMinPremMnthly id="insMinPremMnthly" placeholder="" required />
+							</div>-->
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Last Update Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.insProduct.productLastUpdateDt" [disabled]="EditDisable" required class="form-control"
+									#insProductLastDate id="insProductLastDate" name="prodLastUpdate" placeholder="" />
+							</div>
+							<label class="col-sm-2 text-right">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" required name="ins7DaysColle" #ins7DaysColle>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" name="benifit" [(ngModel)]="productModel.benFeature" rows="3" id="insBenifit"
+										#insBenifit required style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" name="feature" [(ngModel)]="productModel.limitationsRisks" rows="3" id="insLimits"
+										#insLimits required style="resize: none"></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+
+	<form>
+		<div class="row" *ngIf="newProductType==='DCI'">
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="dciProductProvider" class="form-control" required
+									#dciProductProvider id="dciProductProvider" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">DCI Interest Term </label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.dciProduct.sdInterestTerm" name="dciInterestTerm" class="form-control" #dciInterestTerm
+									id="#dciInterestTerm" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" required name="dci7DaysCancel" #dci7DaysCancel>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="productId" class="form-control" #dciProductId maxlength=10
+									id="dciProductId" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">DCI Interest Term Code</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.dciProduct.sdInterestTermCode" name="termCode" class="form-control" #dciInterestTermCode maxlength=2
+									id="dciInterestTermCode" placeholder="" />
+							</div>
+							<label class="col-sm-2">Deal Start Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.dciProduct.dealStartDt" name="dealStartDate" [disabled]="EditDisable" class="form-control" #dciDealStartDt
+									id="dciDealStartDt" placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="dciProductName"  class="form-control"
+									required #dciProductName id="dciProductName" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.minEntryAge" name="minage" class="form-control" #dciProductMinEntryAge id="dciProductMinEntryAge"
+									placeholder="" required />
+							</div>
+							<label class="col-sm-2">DCI Deal End Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.dciProduct.dealEndDt" name="dciEndDt" required class="form-control" #dciDealEndDt
+									id="dciDealEndDt" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="dcicurrency" class="form-control" #dciCurrency id="dciCurrency" required
+									placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.maxEntryAge" name="MaxAge" class="form-control" #dciMaxEntryAge id="dciMaxEntryAge"
+									placeholder="" required />
+							</div>
+						</div>
+					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Prohibitted Country</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="dciProhibitedCountry" #dciProhibitedCountry (change)="onChangeOfDefaultCountryType(dciProhibitedCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList" value="{{defaultCountry.descCode}}">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+							</div>
+							<div class="col-sm-2">
+								<select class="form-control" name="dciCountryList" #dciCountryList (click)="onClickCountryType(dciCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Client Segment<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox" [(ngModel)]="productModel.prodRetailInd" required
+									name="dciRetail">Retail</label> <label class="checkbox-inline"><input [(ngModel)]="productModel.prodPremierInd" required
+									type="checkbox" name="dciPremier">Premier</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox" [(ngModel)]="productModel.prodPrivateInd" required
+									name="dciPrivate">Private</label>
+							</div>
+							<label class="col-sm-2">Tenure<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" required [(ngModel)]="productModel.tenure" required name="dciTenure" #dciTenure id="dciTenure"
+									placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="dciProdStatus" #dciProdStatus
+									(change)="onChangeProductStatus(dciProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+								<select class="form-control" [(ngModel)]="productModel.productStatus" required name="dciAiStatus" #dciAiStatus>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Premium Type</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.premiumType" name="dciPremiumType" #dciPremiumType (change)="onChangePremiumType(productModel.insProduct.insPremiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray"  value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.aiProductInd" required name="dciAiStatus" class="form-control" #dciAiStatus
+									id="dciAiStatus" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" name="dciRiskRate" #dciRiskRate required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="dciSafeYourWealth"
+									#dciSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="dciEducation" #dciEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="dciMortgage" #dciMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="dciEnhanceYourHealth" #dciEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="dciProtUponDeath" #dciProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="dciCoverlossIncome" #dciCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="dciGenerateIncome" #dciGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="dciProtUponTpd" #dciProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="dciColdAgeDisabilities"
+									#dciColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="dciLegacy" #dciLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="dciProtUponCritIlleness"
+									#dciProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="dciHouseView" #dciHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.retirementInd" required name="dciRetirement" #dciRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.hospProInd" required name="dciHospitalization" #dciHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" required [(ngModel)]="productModel.benFeature" name="dcibenifit" rows="3" id="dciBenifits"
+										#dciBenifits style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" required rows="3" [(ngModel)]="productModel.limitationsRisks" #dciLimits id="dciLimits"
+										name="dciLimits" style="resize: none"></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+
+	<form>
+		<div class="row" *ngIf="newProductType==='Bonds'">
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="bondProductProvider" class="form-control" required
+									#bondProductProvider id="bondProductProvider" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">ISIN Code<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text"  [(ngModel)]="productModel.bondProduct.isinCode" name="isinCode" class="form-control" #bondISINCode required
+									id="bondISINCode" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Coupon Per Annum</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.bondProduct.couponPerAnn" name="coupnperAnn" class="form-control" #bondsCouponAnnum
+									id="bondsCouponAnnum" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="bondProductId" class="form-control" maxlength=10
+									#bondProductId id="bondProductId" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.minEntryAge" name="minEntryAge" class="form-control" #bondMinEntryAge id="bondMinEntryAge"
+									placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Min Investment Amount</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.bondProduct.minInvestVal" name="minInvest" class="form-control" #bondMinInvAmnt
+									id="bondMinInvAmnt" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="bondProductName"  class="form-control" required
+									#bondProductName id="bondProductName" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.maxEntryAge" name="maxAge" class="form-control" #bondMaxEntryAge id="bondMaxEntryAge"
+									placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">Min Redemption Amount</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.bondProduct.minRedemptionVal" name="minRedamnt" class="form-control" #bondMinRedAmnt
+									id="bondMinRedAmnt" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="bondurrency" required class="form-control" #bondCurrency id="bondsCurrency"
+									placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Denomination<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.bondProduct.denominationVal" name="denomination" required class="form-control"
+									#bondsDenomination id="bondDenomination" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" required name="bond7DaysCollects" #bonds7DaysCollects>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Maturity Date</label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.bondProduct.maturityDate" name="maturityDate" class="form-control" #bondsMaturityDate
+									id="bondMaturityDate" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Prohibited Country</label>
+							<div class="col-sm-2">
+								<select class="form-control" name="bondProhibitedCountry" #bondsProhibitedCountry (change)="onChangeOfDefaultCountryType(bondProhibitedCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList" value="{{defaultCountry.descCode}}">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+							</div>
+
+							<div class="col-sm-2">
+								<select class="form-control" name="bondCountryList" #bondCountryList (click)="onClickCountryType(bondCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Client Segment<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox" [(ngModel)]="productModel.prodRetailInd" required
+									name="bondsRetail">Retail</label> <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="productModel.prodPremierInd" required
+									name="bondsPremier">Premier</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox" [(ngModel)]="productModel.prodPrivateInd" name="private" required
+									>Private</label>
+							</div>
+							<label class="col-sm-2">Tenure<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" class="form-control" required [(ngModel)]="productModel.prodRetailInd" required name="bondsTenure" #bondsTenure
+									id="bondsTenure" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="bondsProdStatus" #bondsProdStatus
+									(change)="onChangeProductStatus(bondsProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+								<select class="form-control" [(ngModel)]="productModel.productStatus" required name="bondsProdStatus" #bondsProdStatus>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Premium Type</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.premiumType" name="bondsPremiumType" #bondsPremiumType (change)="onChangePremiumType(productModel.insProduct.insPremiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray"  value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.aiProductInd" required name="bondsAIStatus" class="form-control" #bondsAIStatus
+									id="bondsAIStatus" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" name="bondsRiskRate" #bondsRiskRate required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="bondsSafeYourWealth"
+									#bondsSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="bondsEducation" #dciEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="bondsMortgage" #bondsMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="bondsEnhanceYourHealth"
+									#bondsEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="bondsProtUponDeath" #bondsProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="bondsCoverlossIncome"
+									#bondsCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="bondsGenerateIncome" #bondsGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="bondsProtUponTpd" #bondsProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="bondsColdAgeDisabilities"
+									#bondsColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="bondsLegacy" #bondsLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="bondsProtUponCritIlleness" #bondsProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="bondsHouseView" #bondsHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.retirementInd" required name="bondsRetirement" #bondsRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.hospProInd" required name="bondsHospitalization" #bondsHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" required [(ngModel)]="productModel.benFeature" name="dcibenifit" rows="3" id="bondsBenifits"
+										#bondsBenifits style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" name="limit" [(ngModel)]="productModel.limitationsRisks" rows="3" id="bondsmLimits" #bondsLimits
+										style="resize: none" required></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</div>
+
+		</div>
+	</form>
+	<form>
+		<div class="row" *ngIf="newProductType==='SP'">
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Main Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Provider<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="spProductProvider" class="form-control" required
+									#spProductProvider id="spProductProvider" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">SP Interest Term</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.spProduct.sdInterestTerm" name="spintertersm" class="form-control" #spInterestTerm
+									id="spInterestTerm" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Offer Start Date<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.spProduct.offerStartDt" name="offstartdate" required class="form-control" #spInterestOffStartDate
+									id="spInterestOffStartDate" placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product ID<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productId"  name="spProduct" class="form-control" #spProductId
+								   maxlength=10	id="spProductId" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">SP Interest Term Code</label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.spProduct.sdInterestTermCode" name="sptermcode" class="form-control" #spInterestTermCode maxlength=2
+									id="spInterestTermCode" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Offer End Date<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="date" [(ngModel)]="productModel.spProduct.offerEndDt" name="spOffer" class="form-control" #spOfferEndDate id="spOfferEndDate"
+									placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Name<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.productName" name="spProductName"  class="form-control" required
+									#spProductName id="spProductName" placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Min Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.minEntryAge" name="minage" class="form-control" #spMinEntryAge id="spMinEntryAge"
+									placeholder="" required />
+							</div>
+
+							<label class="col-sm-2">7 Days Cancellation<span
+								class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.sevenDayCancInd" required name="sp7DaysCan" #sp7DaysCan>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Currency<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tradeCurrency" name="spcurrency" class="form-control" #spCurrency id="spCurrency" required
+									placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Max Entry Age<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.maxEntryAge" name="maxAge" class="form-control" #spMaxEntryAge id="spMaxEntryAge"
+									placeholder="" required />
+							</div>
+
+							<label class="col-sm-1">Prohibited Country</label>
+							<div class="col-sm-1">
+								<select class="form-control" name="spProhibitedCountry" #spProhibitedCountry (change)="onChangeOfDefaultCountryType(spProhibitedCountry.value)">
+									<option *ngFor="let defaultCountry of defaultCountryList" value="{{defaultCountry.descCode}}">{{defaultCountry.description}}</option>
+								</select>
+							</div>
+							<div class="col-sm-1">
+								<a type="button" class="btn btn-default" (click)="getAddittionOfProducts()"> <span class="glyphicons glyphicons-plus-sign"></span> +
+								</a>
+								<a type="button" class="btn btn-default" (click)="getRemovalOfProducts()"> <span class="glyphicons glyphicons-minus-sign"></span> -
+								</a>
+							</div>
+							<div class="col-sm-1">
+								<select class="form-control" name="spCountryList" #spCountryList (click)="onClickCountryType(spCountryList.value)">
+									<option value="0">--Select-Country--</option>
+									<option *ngFor="let country of countryTypeUIArray" value="{{country.descCode}}" >{{country.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Product Suitability Details</legend>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Client Segment<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<label class="checkbox-inline"><input type="checkbox" [(ngModel)]="productModel.prodRetailInd"
+									name="spRetail">Retail</label> <label class="checkbox-inline"><input [(ngModel)]="productModel.prodPremierInd" 
+									type="checkbox" name="spPremier">Premier</label>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-2"></div>
+							<div class="col-sm-2">
+								<label class="checkbox-inline "><input type="checkbox" [(ngModel)]="productModel.prodPrivateInd"
+									name="spPrivate">Private</label>
+							</div>
+							<label class="col-sm-2">Tenure<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.tenure" class="form-control" required name="spTenure" #spTenure id="spTenure"
+									placeholder="" />
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Product Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<!-- <select class="form-control" name="spProdStatus" #spProdStatus
+									(change)="onChangeProductStatus(spProdStatus.value)">
+									<option *ngFor="let productStatus of productStatusArray">{{productStatus.descCode}}</option>
+								</select> -->
+								<select class="form-control" [(ngModel)]="productModel.productStatus" required name="spProdStatus" #spProdStatus>
+									<option value="false">InActive</option>
+									<option value="true">Active</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Premium Type</label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.premiumType" name="spPremiumType" #insPremiumType (change)="onChangePremiumType(productModel.premiumType)">
+									<option *ngFor="let premiumType of premiumTypeArray"  value="{{premiumType.descCode}}">{{premiumType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">AI Status<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<input type="text" [(ngModel)]="productModel.aiProductInd" required name="spAiStatus" class="form-control" #spAiStatus id="spAiStatus"
+									placeholder="" />
+							</div>
+
+							<label class="col-sm-2">Product Risk Rating<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.riskRating" name="spRiskRate" #spRiskRate required (change)="onChangeRiskRatingType(productModel.riskRating)">
+									<option *ngFor="let riskRateType of riskRatingTypeArray" value="{{riskRateType.descCode}}" >{{riskRateType.description}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Financial Objective Details</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Safeguard Your wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.safegurardWealthInd" required name="spSafeYourWealth" #spSafeYourWealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Education<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.educationInd" required name="spEducation" #spEducation>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Mortgage<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.motgageProInd" required name="spMortgage" #spMortgage>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Enhance your Wealth<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.assetEnhanceInd" required name="spEnhanceYourHealth" #spEnhanceYourHealth>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Death<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.deathProtInd" required name="spProtUponDeath" #spProtUponDeath>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for loss of Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverLossOfIncInd" required name="spCoverlossIncome" #spCoverlossIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Generate Income<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.incGenInd" required name="spGenerateIncome" #spGenerateIncome>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon TPD<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.tpdProInd" required name="spProtUponTpd" #spProtUponTpd>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Cover for old age disabilities<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.coverOldageDisInd" required name="spColdAgeDisabilities"
+									#spColdAgeDisabilities>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Legacy<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.legacyInd" required name="spLegacy" #spLegacy>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Prot Upon Critical Illeness<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.prodFinObjDTO.criticalIllProInd" required name="spProtUponCritIlleness" #spProtUponCritIlleness>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">House View<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.houseViewInd" required name="spHouseView" #spHouseView>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-12">
+							<label class="col-sm-2">Retirement<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.retirementInd" required name="spRetirement" #spRetirement>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+
+							<label class="col-sm-2">Hospitalization<span class="color">*</span></label>
+							<div class="col-sm-2">
+								<select class="form-control" [(ngModel)]="productModel.hospProInd" required name="spHospitalization" #spHospitalization>
+									<option value="false">NO</option>
+									<option value="true">YES</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</div><br><br>
+			<div class="col-xs-12 col-sm-12">
+				<fieldset class="fsStyle">
+					<legend class="legendStyle">Benifits And limitations</legend>
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="col-sm-6">
+								<label class="col-sm-4">Benefits & Features<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" required [(ngModel)]="productModel.benFeature" name="spBenifits" rows="3" id="spBenifits"
+										#spBenifits style="resize: none"></textarea>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<label class="col-sm-4">Limitation & Risk<span class="color">*</span></label>
+								<div class="col-sm-8 input-group">
+									<textarea class="form-control custom-control" required [(ngModel)]="productModel.limitationsRisks" name="spLimits" rows="3"
+										id="spLimits" #spLimits style="resize: none"></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+	</fieldset>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12">
+
+			<!--<div class="col-xs-6 col-sm-6 text-right">
+				<button [routerLinkActive]="['active']" class="btn btn-warning btn-primary pull-left btn-sm-3" [routerLinkActiveOptions]="{exact:true}"
+					[routerLink]="['../product-maintenance.component']">Back</button>
+			</div>-->
+
+			<!--<div class="col-xs-6 col-sm-6 text-right">
+				<button (click)="goBack()" class="btn btn-warning btn-primary pull-left btn-sm-3">Back</button>
+			</div>-->
+
+
+
+			<div class="form-group col-xs-1 col-sm-12">
+			</div>
+			<!--<div class="form-group">
+				<button type="submit" class="btn btn-primary" [disabled]="utNewForm.valid">Submit</button>
+			</div>-->
+		</div>
+		<div class="col-xs-12 col-sm-12 text-right" [ngClass]="{'showContent': hideApproveReject }">
+			<div class="col-xs-10 col-sm-9">
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<button type="submit" class="btn btn-warning buttonWidth" (click)="onApporveRejectCheck('APPROVED')">Approve</button>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<button type="submit" class="btn btn-warning buttonWidth" (click)="onApporveRejectCheck('REJECTED')" data-toggle="modal" data-target="#myModal"
+					[disabled]="disableEdit==true ? true : null">Reject</button>
+			</div>
+			<div class="col-xs-1 col-sm-1">
+				<button type="submit" class="btn btn-warning buttonWidth" (click)="unlockData()" data-toggle="modal" data-target="#myModal"
+					[disabled]="disableEdit==true ? true : null">unlock</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div>

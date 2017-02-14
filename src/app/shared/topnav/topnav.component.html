@@ -1,0 +1,62 @@
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+              <img class="topnav-logo" src="{{topNavLogoUrl}}">
+              <span class="topnav-header">{{topNavTitle}}</span> 
+            </div>
+            <!-- /.navbar-header -->
+			<div id="navbar-collapse" class="collapse navbar-collapse">
+	            <ul class="nav navbar-top-links navbar-right">
+	            		    
+	                <li>
+	                    <a id="messageIcon" class="dropdown-toggle" data-toggle="collapse" href="#demo" (click)="showMessages()">
+	                        <i class="fa fa-bell fa-fw " [style.color]="imageColor"></i><i class="fa fa-caret-down"></i>
+	                    </a>
+	                    <ul id="demo" class="dropdown-menu dropdown-alerts collapse"  [ngClass]="{'scroll-class': isClassVisible }" >
+	                        <li *ngFor="let doc of messages">
+	                            <i class="fa fa-fw"></i> 
+	                            <!-- <span class="pull-right text-muted small right-align">{{doc.createDtm | date :  "dd/MM/yyyy HH:MM a"}}</span> -->
+	                            <!-- <a href="#demo" routerLink="/dashboard/{{doc.moduleName}}/{{doc.moduleId}}"> -->
+	                            	{{doc.description}}<span class="pull-right text-muted small right-align">{{doc.createDtm | date :  "dd/MM/yyyy"}}</span>
+	                            <!-- </a> -->
+	                             <hr class="divider" />
+	                        </li>
+	                        <li *ngIf="showLink">
+	                            <a class="text-center"  (click)="showAllMessages()">
+	                                <strong>See All Messages</strong>
+	                                <i class="fa fa-angle-right"></i>
+	                            </a>
+	                        </li>
+	                    </ul>
+	                    <!-- /.dropdown-alerts -->
+	                </li>
+	                <!-- /.dropdown -->
+	                <li class="dropdown">
+	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	                        <i class="glyphicon glyphicon-user"></i> <span class="username-label"> {{userName}} </span>    <i class="fa fa-caret-down"></i>
+	                    </a>
+	                    
+	                    <ul class="dropdown-menu dropdown-user">
+	                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+	                        </li>
+	                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+	                        </li>
+	                        <li class="divider"></li>
+	                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+	                        </li>
+	                    </ul>
+	                    <!-- /.dropdown-user -->
+	                </li>
+	                <!-- /.dropdown -->
+	            </ul>
+			</div>
+            <!-- side bar here  -->
+	</div>
+        </nav>

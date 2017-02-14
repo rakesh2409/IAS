@@ -1,0 +1,228 @@
+<div class="container-fluid">
+<app-error [errorMsg] = "error" [successMsg]="successMsg" [infoMsg] = "infoMsg"></app-error>
+  <div class="row">
+  	<form (ngSubmit)="searchForm.form.valid && findUserId(searchId)" #searchForm="ngForm">
+	    <div class="col-xs-4 col-sm-4 form-group no-padding">
+	    	<label class="col-xs-3 col-sm-3">User ID</label>
+	    	<div class="col-xs-9 col-sm-9">
+	    		<input [(ngModel)]="searchId" placeholder="Search User Id here..." class="input-sm form-control" name="userId" type="text" maxlength=40 required>
+	    	</div>
+	    </div>
+	    <div class="col-xs-8 col-sm-8 form-group">
+	    	<button type="submit" class="btn btnSave btn-warning pull-right">Search</button>
+	    </div>
+    </form>
+  </div>
+<fieldset [disabled]="disableRecord">
+  <hr style="width: 100%; color: #c1ccd1; height: 0.5px; background-color:#c1ccd1" />
+  <form (ngSubmit)="f.form.valid && submitForm()" #f="ngForm">
+	  <div class="row">
+		  	<div class="col-xs-3 col-sm-3 form-group no-padding">
+		    	<label class="col-xs-4 col-sm-4">User ID</label>
+		    	<div class="col-xs-8 col-sm-8">
+		    		<input [(ngModel)]="userModel.userLoginId" [disabled]="disableField" placeholder="Enter User ID here..." class="input-sm form-control" name="userId" type="text" maxlength=40 required>
+		    	</div>
+		    </div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Name</label>
+	  			<div class="col-xs-8 col-sm-8">
+	  				<input type="text" [(ngModel)]="userModel.userName" [disabled]="disableField" name="userName" placeholder="Enter User Name Here.." class="input-sm form-control" maxlength=40 required>
+	  			</div>		
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Designation</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.userDesignation" name="designation" placeholder="Enter User Designation here..." class="input-sm form-control" maxlength=20 required>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Status</label>
+				<div class="col-xs-8 col-sm-8">
+				<select class="form-control" [(ngModel)]="userModel.userStatus" name="status" required>
+	                  <option value="Active">Active</option>
+	                  <option value="Dormant">Dormant</option>
+	                  <option value="Deactivated">Deactivated</option>
+	            </select></div>
+	  		</div>
+	  </div>
+	  <div class="row">
+	 		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Department</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.userDepartment" name="department" placeholder="Enter Department Here.." class="input-sm form-control" maxlength=20 required>
+	  			</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Last Login</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.userLastloginDtm" name="lastLoginDtm" class="input-sm form-control" readonly>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Creation Date</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.createDtm" name="createDtm" class="input-sm form-control" readonly>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Group/Profile</label>
+				<div class="col-xs-8 col-sm-8">
+					<select class="form-control" [(ngModel)]="userModel.userGroupName" name="groupName" (change)="mapUserGroup(userModel.userGroupName)" required>
+	            		<option *ngFor="let item of profiles" value="{{item.usergroupName}}">{{item.usergroupName}}</option>
+	            	</select>
+	            </div>
+	            <input type="hidden" class="input-sm form-control" name="groupId" [(ngModel)]="userModel.usergroupId">
+	  		</div> 
+	  </div>
+	  <div class="row">		
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Last Maintenance Date</label>
+				<div class="col-xs-8 col-sm-8">
+					<input type="text" [(ngModel)]="userModel.lastUpDateDtm" name="lastUpDateDtm" class="input-sm form-control" readonly>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">PF Number</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.pfNum" name="pfNum" placeholder="Input PF Number here.." class="input-sm form-control" maxlength=10 required>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Email</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="email" [(ngModel)]="userModel.email" name="email" placeholder="example@maybank.com" class="input-sm form-control" maxlength=30 required>
+				</div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Phone Number</label>
+				<div class="col-xs-8 col-sm-8">
+					<input type="text" [(ngModel)]="userModel.phone" name="phone" class="input-sm form-control" maxlength=20 required>
+				</div>
+	  		</div>
+	  </div>
+	  <div class="row">
+		  <div class="col-xs-12 col-sm-12 form-group no-padding">
+	  	  	 <label class="col-xs-4 col-sm-4"><u><b>FA REP</b></u></label>
+	  	  </div>
+	  </div>
+	 <div class="row">
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Selected Rep</label>
+	  			<div class="col-xs-8 col-sm-8">
+	  				<select class="form-control" [(ngModel)]="userModel.selectedRep" name="selectedRep">
+	                  <option value="Yes">Yes</option>
+	                  <option value="No" selected>No</option>
+	            	</select>
+	  			</div>		
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">From Date</label>
+				<div class="col-xs-8 col-sm-8">
+					<input type="date" [(ngModel)]="userModel.userEffectiveFromDt" name="userEffectiveFromDt" class="input-sm form-control">
+	            </div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">To Date</label>
+				<div class="col-xs-8 col-sm-8">
+					<input type="date" [(ngModel)]="userModel.userEffectiveToDt" name="userEffectiveToDt" class="input-sm form-control">
+	            </div>
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Rep ID</label>
+				<div class="col-xs-8 col-sm-8">
+				<input type="text" [(ngModel)]="userModel.representativeId" name="repId"  placeholder="Enter User Rep ID here..." class="input-sm form-control" maxlength=20>
+				</div>
+	  		</div>
+	  		
+	  		
+	  </div>
+	  <div class="row">
+	 		
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Branch</label>
+	  			<div class="col-xs-8 col-sm-8">
+	  				<select class="form-control" [(ngModel)]="userModel.userBranch" name="branch">
+	                  <option value="Maybank Tower">Maybank Tower</option>
+	                  <option value="Maybank@RobinsonRoad">Maybank@RobinsonRoad</option>
+	                  <option value="Maybank@Tampines">Maybank@Tampines</option>
+	                  <option value="Maybank@Woodlands">Maybank@Woodlands</option>
+	                  <option value="Maybank@HDBHub">Maybank@HDBHub</option>
+
+	            	</select>
+	  			</div>		
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">BSC Grading</label>
+	  			<div class="col-xs-8 col-sm-8">
+	  				<select class="form-control" [(ngModel)]="userModel.userBscGrade" name="bscGrade">
+	                  <option value="Grade E" selected>Grade E</option>
+	            	</select>
+	  			</div>		
+	  		</div>
+	  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+	  			<label class="col-xs-4 col-sm-4">Agent Code</label>
+				<div class="col-xs-8 col-sm-8">
+					<input type="text" class="input-sm form-control" [(ngModel)]="userModel.agentCode" name="agentCode" maxlength=8>
+	            </div>
+	  		</div>
+	  </div>
+	  <div class="row">
+	 		<div class="col-xs-2 col-sm-2 form-group">
+	  			<label>Authorized Products : </label>
+	  		</div>
+	  		<div class="col-xs-9 col-sm-9 form-group">
+	  			<label class="checkbox-inline" *ngFor="let items of products">
+	  			<input type="checkbox" name="{{items.name}}" [(ngModel)]="items.checked" value="{{items.code}}">{{items.name}}</label>
+	  		</div>
+	  </div>
+	  <button #submitButton type="submit" class="hidden btn-warning pull-right">Submit</button>
+	</form>
+</fieldset>  
+  <div class="row">
+  		<div class="col-xs-7 col-sm-7 form-group" [ngClass]="{'showContent': hideApproveReject }">
+  			<button type="submit" class="btn btnSave btn-danger pull-right" (click)="updateRequest('REJECTED')">Reject</button>
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="updateRequest('APPROVED')">Approve</button>	
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="unlockData()">Exit</button>		
+  		</div>
+  	<fieldset [disabled]="disableRecord">
+  		<div class="col-xs-12 col-sm-12 form-group">
+  			<button type="submit" class="btn btnSave btn-warning pull-right">Reset</button>
+  			<button type="button" (click)="clearFields()" class="btn btnSave btn-warning pull-right">Clear Fields</button>
+  		</div>
+  	</fieldset>
+  		<div class="col-xs-12 col-sm-12">
+  		<table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Group/Profile</th>
+              <th>Department</th>
+              <th>Designation</th>
+              <th>PF Num</th>
+              <th>Status</th>
+              <th>Phone</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+          	  <tr (dblclick)="selectUserRow(users)" *ngFor="let users of userList; let i = index" (click)="setActiveRow(i)" [class.active]="i == activeRowIndex" >
+		      <td>{{users.userLoginId}}</td>
+		      <td>{{users.userName}}</td>
+		      <td>{{users.userGroupName}}</td>
+		      <td>{{users.userDepartment}}</td>
+		      <td>{{users.userDesignation}}</td>
+		      <td>{{users.pfNum}}</td>
+		      <td>{{users.userStatus}}</td>
+		      <td>{{users.phone}}</td>
+		      <td>{{users.email}}</td>
+		      </tr>
+		      <tr *ngIf="userList?.length <= 0">
+		      	<td colspan="9">No items in the list</td>
+		      </tr>
+          </tbody>
+        </table>
+  		</div>
+  	
+  </div>
+</div>

@@ -1,0 +1,504 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel panel-default">
+			<!--<div class="panel-heading">
+				<h4>Create Prospect Non-Individual</h4>
+				 End of panel-heading 
+			</div>-->
+
+			<div class="panel-body">				
+				<!-- Column: Customer Details -->
+				<div class="col-xs-12 col-sm-12">
+				
+					<!-- Group panel: Customer Details -->
+					<fieldset class="fsStyle">
+
+						<!--Group Label: Customer Details  -->
+						<legend class="legendStyle">Customer Details</legend>
+
+						<!-- Company Name  -->
+						<div class="row">
+							<!-- Label: Comapny Name -->
+							<label class="col-sm-2">Company Name <span class="color">*</span></label>
+
+							<div class="col-sm-4">
+								<!-- Input:Company Name -->
+								<input type="text" name="clientCompName"
+									class="input-sm form-control" maxlength=80
+									placeholder="Company Name" [(ngModel)]="clientModel.clientCompanyName">
+							</div>
+							<!-- End of Company Name Input: Column -->
+
+						</div>
+						<!--End of Company Name: Row  -->
+
+						<!-- Registration No  -->
+						<div class="row">
+							<!-- Label: Registration No -->
+							<label class="col-sm-2">Registration/UEN/Gazette No <span
+								class="color">*</span></label>
+
+							<div class="col-sm-4">
+								<!-- Input:Registration No -->
+								<input type="text" name="clientRegNo"
+									class="input-sm form-control" maxlength=20 placeholder="ID No"  [(ngModel)]="clientModel.clientIdNo">
+							</div>
+							<!-- End of Registration No Input: Column -->
+
+						</div>
+						<!--End of Registration No: Row  -->
+
+						<!-- Date of Incorporation  -->
+						<div class="row">
+							<!-- Label: Date of Incorporation -->
+							<label class="col-sm-2">Date of Incorporation<span
+								class="color">*</span></label>
+
+							<div class="col-sm-2">
+								<!-- Date Picker : Date of Incorporation-->
+								<input type="date" name="clientIncorporationDate"
+									class="input-sm form-control"  [(ngModel)]="clientModel.clientExt.client_bir_Inc_dt">
+							</div>
+							<!-- End of Date of Incorporation: Column -->
+
+						</div>
+						<!--End of Date of Incorporation: Row  -->
+
+						<!-- Country of Incorporation  -->
+						<div class="row">
+
+							<!-- Label: Country of Incorporation -->
+							<label class="col-sm-2">Country of Incorporation<span
+								class="color">*</span></label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown:Country of Incorporation use Country (Array)***-->
+								<select class="form-control" name="clientCountryOfIncorp"  [(ngModel)]="clientModel.clientNationalityDesc">
+									<option *ngFor="let client of countryArray" value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Country of Incorporation Dropdown: Column -->
+
+						</div>
+						<!--End of Country of Incorporation: Row  -->
+
+						<!-- Registered Address  -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address -->
+							<label class="col-sm-2">Registered Address <span
+								class="color">*</span></label>
+
+							<!-- Column: Registered Address1 -->
+							<div class="col-sm-6">
+
+								<!-- Input: Address1 -->
+								<input type="text" name="clientCompAddress1"
+									class="input-sm form-control" maxlength=40
+									placeholder="Registered Address" [(ngModel)]="clientModel.clientAddressDet[0].addressLine1">
+							</div>
+							<!-- End of Address1 Input: Column -->
+
+						</div>
+						<!--End of Address1: Row  -->
+
+						<!-- Residential Address 2 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 2 -->
+							<label class="col-sm-2"><span class="color"></span></label>
+
+							<!-- Column: Registered Address 2 -->
+							<div class="col-sm-6">
+
+								<!-- Input:Address 2 -->
+								<input type="text" name="clientCompAddress2"
+									class="input-sm form-control" maxlength=40 [(ngModel)]="clientModel.clientAddressDet[0].addressLine2">
+							</div>
+							<!-- End of Address2 Input: Column -->
+
+						</div>
+						<!--End of Address2: Row  -->
+
+						<!-- Residential Address 3 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 3 -->
+							<label class="col-sm-2"><span class="color"></span></label>
+
+							<!-- Column: Registered Address 3 -->
+							<div class="col-sm-6">
+
+								<!-- Input:Address 3 -->
+								<input type="text" name="clientCompAddress3"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="clientModel.clientAddressDet[0].addressLine3">
+							</div>
+							<!-- End of Address3 Input: Column -->
+
+						</div>
+						<!--End of Address3: Row  -->
+
+						<!-- Residential Address 4 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 4 -->
+							<label class="col-sm-2"><span class="color"></span></label>
+
+							<!-- Column: Registered Address 4 -->
+							<div class="col-sm-6">
+
+								<!-- Input: Address4 -->
+								<input type="text" name="clientCompAddress4"
+									class="input-sm form-control" maxlength=40 [(ngModel)]="clientModel.clientAddressDet[0].addressLine4">
+							</div>
+							<!-- End of Address4 Input: Column -->
+
+						</div>
+						<!--End of Address4: Row  -->
+
+
+						<!-- Nature of Business  -->
+						<div class="row">
+
+							<!-- Label: Nature of Business -->
+							<label class="col-sm-2">Nature of Business</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown:Nature of Business use Industry(Array)***-->
+								<select class="form-control" name="clientNatureOfBiz" [(ngModel)]="clientModel.clientExt.clientIndustryId">
+									<option *ngFor="let client of clientIndustrysArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Nature of Business Dropdown: Column -->
+
+						</div>
+						<!--End of Nature of Business: Row  -->
+
+						<!-- Country of Business  -->
+						<div class="row">
+
+							<!-- Label: Country of Business -->
+							<label class="col-sm-2">Country of Business<span
+								class="color">*</span></label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown:Country of Business use Country (Array)***-->
+								<select class="form-control" name="clientCountryOfBiz"  [(ngModel)]="clientModel.clientExt.clientResCntryCode">
+									<option *ngFor="let client of countryArray"   value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Country of Business Dropdown: Column -->
+
+						</div>
+						<!--End of Country of Business: Row  -->
+
+						<!-- Contact No Office  -->
+						<div class="row">
+
+							<!-- Label: Office No -->
+							<label class="col-sm-2">Contact No &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Office) <span
+								class="color">*</span>
+							</label>
+
+							<!-- Column: Office No -->
+							<div class="col-sm-4">
+								<!-- Input:Office No -->
+								<div class="input-group">
+									<span class="input-group-addon">02</span> <input
+										id="client-mobile" type="text" class="form-control"
+										maxlength=20 name="clientOffice" placeholder="Office No" [(ngModel)]="clientModel.clientOfficeId">
+								</div>
+								<!-- End of Input Office No: Class -->
+
+							</div>
+							<!-- End of Office No Input: Column -->
+
+						</div>
+						<!--End of Office No: Row  -->
+
+						<!-- Contact No Fax  -->
+						<div class="row">
+
+							<!-- Label: Fax -->
+							<label class="col-sm-2"><p style="text-indent:7em;">(Fax)</p> </label>
+
+							<!-- Column: Fax -->
+							<div class="col-sm-4">
+
+								<!-- Input:Fax -->
+								<input type="text" name="clientFax"
+									class="input-sm form-control" maxlength=20 placeholder="Fax" [(ngModel)]="clientModel.clientExt.clientFaxNo">
+							</div>
+							<!-- End of Fax Input: Column -->
+
+						</div>
+						<!--End of Fax: Row  -->
+
+						<!-- Email -->
+						<div class="row">
+							<!-- Label: Email -->
+							<label class="col-sm-2">Email</label>
+
+							<div class="col-sm-4">
+
+								<!--Input: Email-->
+								<input type="text" name="clientEmail"
+									class="input-sm form-control" placeholder="Email" maxvalue="80" [(ngModel)]="clientModel.clientExt.clientEmailId">
+							</div>
+							<!-- End of Email: Column -->
+
+						</div>
+						<!--End of Email: Row  -->
+
+					</fieldset>
+					<!-- End of Customer Details: Group -->
+				</div>
+				<!--End of Customer Details: Column  -->
+
+				<!-- Director/Officers -->
+				<div class="col-xs-12 col-sm-12" *ngFor="let dependent of clientModel.clientDependentExtDTO let cnt = index">
+				
+					<!-- Group panel: Director/Officers -->
+					<fieldset class="fsStyle">
+
+						<!--Group Label: Director/Officers  -->
+						<legend class="legendStyle">Director/Officers</legend>
+						<div class = "row">
+							<div class="col-sm-12">
+							
+								<button type="button"
+										class="btn btn-space btn-warning custom-button-width pull-right" (click)= "removeDirector(cnt)">
+										Remove
+									</button>
+							
+							</div>
+						</div>
+						<!-- Director Name  -->
+						<div class="row">
+							<!-- Label: Director Name -->
+							<label class="col-sm-2">Full Name</label>
+
+							<div class="col-sm-4">
+								<!-- Input: -->
+								<input type="text" name="directorLName"
+									class="input-sm form-control" maxlength=80
+									placeholder="Full Name"  [(ngModel)]="dependent.dependentName">
+							</div>
+							<!-- End of LName Input: Column -->
+						</div>
+						<!--End of Director Name: Row  -->
+						
+						<!-- ID  -->
+						<div class="row">
+							<!-- Label: ID Type -->
+							<label class="col-sm-2">ID Type</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown: ID Type (Array)***-->
+								<select class="form-control" name="directorIDType"  [(ngModel)]="dependent.clientIdType">
+									<option *ngFor="let client of idTypeArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of ID Type Dropdown: Column -->
+
+							<!-- Label: ID Number -->
+							<label class="col-sm-1">ID Number</label>
+
+							<div class="col-sm-3">
+								<!-- Input: -->
+								<input type="text" name="directorIDNo"
+									class="input-sm form-control" maxlength=20 placeholder="ID No" [(ngModel)]="dependent.clientIdNo">
+							</div>
+							<!-- End of ID Number Input: Column -->
+
+						</div>
+						<!--End of ID: Row  -->
+						
+						<!-- Designation  -->
+						<div class="row">
+
+							<!-- Label: Designation -->
+							<label class="col-sm-2">Designation</label>
+
+							<!-- Column: Designation -->
+							<div class="col-sm-4">
+
+								<!-- Input:PostCode -->
+								<input type="text" name="directorDesignation"
+									class="input-sm form-control" maxlength=40
+									placeholder="Designation" [(ngModel)]="dependent.designation">
+							</div>
+							<!-- End of Designation Input: Column -->
+
+						</div>
+						<!--End of PostCode: Row  -->
+						
+						<!-- Residential Address  -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address -->
+							<label class="col-sm-2">Registered Address <span
+								class="color">*</span></label>
+
+							<!-- Column: Registered Address1 -->
+							<div class="col-sm-6">
+
+								<!-- Input: Address1 -->
+								<input type="text" name="clientAddress1"
+									class="input-sm form-control" maxlength=40
+									placeholder="Registered Address" [(ngModel)]="dependent.clientAddressDet.addressLine1">
+							</div>
+							<!-- End of Address1 Input: Column -->
+
+						</div>
+						<!--End of Address1: Row  -->
+
+						<!-- Residential Address 2 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 2 -->
+							<label class="col-sm-2"></label>
+
+							<!-- Column: Registered Address 2 -->
+							<div class="col-sm-6">
+
+								<!-- Input:Address 2 -->
+								<input type="text" name="clientAddress2"
+									class="input-sm form-control" maxlength=40 [(ngModel)]="dependent.clientAddressDet.addressLine2">
+							</div>
+							<!-- End of Address2 Input: Column -->
+
+						</div>
+						<!--End of Address2: Row  -->
+
+						<!-- Residential Address 3 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 3 -->
+							<label class="col-sm-2"><span class="color"></span></label>
+
+							<!-- Column: Registered Address 3 -->
+							<div class="col-sm-6">
+
+								<!-- Input:Address 3 -->
+								<input type="text" name="clientAddress3"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="dependent.clientAddressDet.addressLine3">
+							</div>
+							<!-- End of Address3 Input: Column -->
+
+						</div>
+						<!--End of Address3: Row  -->
+
+						<!-- Residential Address 4 -->
+						<div class="form-group row">
+
+							<!-- Label: Registered Address 4 -->
+							<label class="col-sm-2"><span class="color"></span></label>
+
+							<!-- Column: Registered Address 4 -->
+							<div class="col-sm-6">
+
+								<!-- Input: Address4 -->
+								<input type="text" name="clientAddress4"
+									class="input-sm form-control" maxlength=40  [(ngModel)]="dependent.clientAddressDet.addressLine4">
+							</div>
+							<!-- End of Address4 Input: Column -->
+
+						</div>
+						<!--End of Address4: Row  -->
+
+						<!-- Street Address  -->
+						<div class="row">
+
+							<!-- Label: Street -->
+							<label class="col-sm-2">Street</label>
+
+							<!-- Column: Street -->
+							<div class="col-sm-4">
+
+								<!-- Input: -->
+								<input type="text" name="clientStreet"
+									class="input-sm form-control" maxlength=80 placeholder="Street"  [(ngModel)]="dependent.clientAddressDet.addressStName">
+							</div>
+							<!-- End of Street: Column -->
+
+						</div>
+						<!--End of Street: Row  -->
+
+						<!-- PostCode  -->
+						<div class="row">
+
+							<!-- Label: PostCode -->
+							<label class="col-sm-2">Postcode</label>
+
+							<!-- Column: Postcode -->
+							<div class="col-sm-4">
+
+								<!-- Input:PostCode -->
+								<input type="text" name="clientPostCode"
+									class="input-sm form-control" maxlength=10
+									placeholder="Postcode" [(ngModel)]="dependent.clientAddressDet.addressPostcode">
+								
+							</div>
+							
+						
+						</div>
+						<!--End of PostCode: Row  -->
+						
+						
+
+					</fieldset>
+					<!-- End of Additional Info: Group Panel-->
+				</div>
+				
+				<div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12">
+								<div class="col-xs-11 col-sm-10">
+								</div>
+								
+								<div class="col-xs-1 col-sm-2">
+									<button type="button"
+										class="btn btn-space btn-warning custom-button-width pull-right" (click)= "addDirector()">
+										Add Director/Officer
+									</button>
+								</div>
+							</div>
+							
+						
+						</div>
+				</div>
+				<br/><br/>
+				<!-- End of Additional Info -->
+
+				<!-- Buttons -->
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-left" routerLink="/dashboard/search-user/search-client-prospect">
+								<span class="glyphicon glyphicon-chevron-left"></span> Back
+							</button>
+						</div>
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-right" (click)="saveIndClientProspect()">
+								Save <span class="glyphicon glyphicon-chevron-right"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- End of Buttons -->
+
+			</div>
+			<!-- End of panel-body -->
+
+		</div>
+		<!-- End of panel-default -->
+
+
+
+	</div>
+	<!-- end of page row -->
+
+</div>

@@ -1,0 +1,55 @@
+<app-module-heading moduleHeading="Create Prospect"></app-module-heading>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Create Prospect</h4>
+				<!-- End of panel-heading -->
+			</div>
+
+			<div class="panel-body">
+				<div class="row">
+
+					<!-- Label: Client Type -->
+					<div class="col-xs-3 col-sm-3 form-group no-padding">
+						<label class="col-xs-4 col-sm-4">Client Type</label>
+
+						<!--Dropdown: Client Type  -->
+						<div class="col-xs-8 col-sm-8">
+							<select class="form-control" name="clientType" (change)="onSelect($event.target.value)" >
+							    <option value="default">Select</option>
+								<option value="individual">Individual</option>
+								<option value="non-individual">Non Individual</option>
+							</select>
+						</div>
+						<!-- End of Client Type Drop Down Column -->
+
+					</div>
+					<!-- End of Client Type Column -->
+
+					<!-- Label: Client Status -->
+					<div class="col-xs-5 col-sm-5 form-group no-padding">
+						<label class="col-xs-3 col-sm-3">Client Status</label>
+
+						<!-- Input: Client Status-->
+						<div class="col-xs-4 col-sm-4">
+							<input type="text" disabled="disabled" name="clientStatus"
+								value="Prospect" class="input-sm form-control" maxlength=10>
+						</div>
+						<!-- End of Client Type Drop Down Column -->
+
+					</div>
+					<!-- End of Client Type Column -->
+				</div>
+			</div>
+			<!-- End of panel-body -->
+			<router-outlet></router-outlet>
+
+		</div>
+		<!-- End of panel-default -->
+
+	</div>
+	<!-- end of page row -->
+
+</div>

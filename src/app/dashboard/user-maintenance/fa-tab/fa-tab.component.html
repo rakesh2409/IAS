@@ -1,0 +1,120 @@
+<!--  <div class="container-fluid">
+  <div class="row">
+  	<form>
+	    <div class="col-xs-3 col-sm-3 form-group no-padding">
+	    	<label class="col-xs-3 col-sm-3">User ID</label>
+	    	<div class="col-xs-9 col-sm-9">
+	    	<input [(ngModel)]="userModel.userLoginId" placeholder="Search User Id here..." class="input-sm form-control" name="userId" type="text">
+	    	</div>
+	    </div>
+	    <div class="col-xs-9 col-sm-9 form-group">
+	    	<button type="submit" (click)="searchUserId()" class="btn btnSave btn-warning pull-right">Search</button>
+	    </div>
+    </form>
+  </div>
+  <hr style="width: 100%; color: #c1ccd1; height: 1px; background-color:#c1ccd1" />
+  <div class="row">
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">Selected Rep</label>
+  			<div class="col-xs-9 col-sm-9">
+  				<select class="form-control">
+                  <option value="Y">Y</option>
+                  <option value="N" selected>N</option>
+            	</select>
+  			</div>		
+  		</div>
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">Rep ID</label>
+			<div class="col-xs-9 col-sm-9">
+			<input type="text"  placeholder="Enter User Rep ID here..." class="input-sm form-control">
+			</div>
+  		</div>
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">From Date</label>
+			<div class="col-xs-9 col-sm-9">
+				<input type="date"  class="input-sm form-control">
+            </div>
+  		</div>
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">To Date</label>
+			<div class="col-xs-9 col-sm-9">
+				<input type="date"  class="input-sm form-control">
+            </div>
+  		</div>
+  </div>
+  <div class="row">
+ 		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">BSC Grading</label>
+  			<div class="col-xs-9 col-sm-9">
+  				<select class="form-control">
+                  <option value="Grade E">Grade E</option>
+            	</select>
+  			</div>		
+  		</div>
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">Branch</label>
+  			<div class="col-xs-9 col-sm-9">
+  				<select class="form-control">
+                  <option value="Branch 1">Branch 1</option>
+            	</select>
+  			</div>		
+  		</div>
+  		<div class="col-xs-3 col-sm-3 form-group no-padding">
+  			<label class="col-xs-3 col-sm-3">Agent Code</label>
+			<div class="col-xs-9 col-sm-9">
+				<input type="text"  class="input-sm form-control">
+            </div>
+  		</div>
+  </div>
+  <div class="row">
+ 		<div class="col-xs-2 col-sm-2 form-group">
+  			<label>Authorized Products : </label>
+  		</div>
+  		<div class="col-xs-9 col-sm-9 form-group">
+  			<label class="checkbox-inline"><input type="checkbox" value="">Unit Trust</label>
+			<label class="checkbox-inline"><input type="checkbox" value="">Insurance</label>
+			<label class="checkbox-inline"><input type="checkbox" value="">Bonds, ELN, SN, Equity</label>
+			<label class="checkbox-inline"><input type="checkbox" value="">Structured Deposit</label>
+			<label class="checkbox-inline"><input type="checkbox" value="">DCI</label>
+			<label class="checkbox-inline"><input type="checkbox" value="">Futures</label>
+  		</div>
+  </div>
+  <div class="row">
+	<div class="col-xs-12 col-sm-12 form-group"><button type="submit" class="btn btnSave btn-warning pull-right">Edit</button></div>
+  </div>
+  <div class="row">
+  	<div class="col-xs-12 col-sm-12 auto-scroll">
+  		<table class="table table-bordered table-striped table-responsive table-hover">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>User Name</th>
+              <th>Group/Profile</th>
+              <th>Selected Rep</th>
+              <th>BSC Grading</th>
+              <th>Rep ID</th>
+              <th>Branch</th>
+              <th>From Date</th>
+              <th>To Date</th>
+              <th>Authorized Products</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let users of userList">
+              <td>{{users.userLoginId}}</td>
+              <td>{{users.userName}}</td>
+              <td>{{users.userGroupName}}</td>
+              <td>{{users.selectedRep}}</td>
+              <td>{{users.userBscGrade}}</td>
+              <td>{{users.representativeId}}</td>
+              <td>{{users.userBranch}}</td>
+              <td>{{users.userEffectiveFromDt}}</td>
+              <td>{{users.userEffectiveToDt}}</td>
+              <td>sdfsdf</td>
+            </tr>
+          </tbody>
+        </table>
+  	</div>
+  </div>
+</div>
+-->

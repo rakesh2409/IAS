@@ -1,0 +1,16 @@
+.no-padding {
+	padding: 0px;
+}
+.auto-scroll{
+	max-height: 370px;
+	overflow: auto;
+}
+.showContent {
+	display: none;
+}
+.hidden {
+	display: none;
+}
+.btn {
+	margin: 8px;
+}

@@ -1,0 +1,54 @@
+
+legend.legendStyle {
+padding-left: 5px;
+padding-right: 5px;
+}
+fieldset.fsStyle {
+border: 1px solid #999999;
+padding: 4px;
+margin: 5px;
+}
+legend.legendStyle {
+color: #888888;
+background-color: transparent;
+}
+.custom-button-width {
+	width:100px;
+}
+legend {
+width: auto;
+border-bottom: 0px;
+}
+
+.color{
+ color: #d00;
+}
+
+.auto-scroll{
+	max-height: 300px;
+	overflow: auto;
+}
+/*.form-group.required .control-label:after { 
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+    top:7px;
+}*/
+.form-group.required .control-label:before{
+   color:#d00; 
+   content: "*";
+   position: absolute;
+   margin-left: -15px;
+   font-family: 'FontAwesome';
+   font-weight: normal;
+   font-size: 14px;
+   content: "\f069";   
+   /*font-family: 'Glyphicons Halflings';
+   font-weight: normal;
+   font-size: 14px;*/
+}
+.showContent {
+	display: none;
+}
+

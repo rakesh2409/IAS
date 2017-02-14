@@ -1,0 +1,43 @@
+<!-- begin login -->
+  <app-error *ngIf="error" [errorMsg] = "error"></app-error>
+<div class="login bg-black animated fadeInDown">
+    <!-- begin brand -->
+    <div class="login-header">
+        <div class="brand">
+            <img class="tiger-logo img-circle" src="assets/img/maybank-tiger.png"><span style="margin-left:10px;">IAS</span>
+            <small>Integrated Advisory Solution</small>
+        </div>
+        <div class="icon">
+            <i class="fa fa-sign-in"></i>
+        </div>
+    </div>
+    <!-- end brand -->
+
+  
+    <div class="login-content">
+        <form class="margin-bottom-0" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+            <div class="form-group m-b-20">
+                <input type="text" class="form-control input-lg inverse-mode no-border" 
+                 name ="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username"  
+                 required/>
+                 <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+            </div>
+            <div class="form-group m-b-20">
+                <input type="password" class="form-control input-lg inverse-mode no-border"
+                 name ="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password" 
+                 required/>
+                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+            </div>
+            <div class="checkbox m-b-20">
+                <label>
+                    <input type="checkbox" /> Remember Me
+                </label>
+            </div>
+            <div class="login-buttons">
+                <button type="submit" class="btn btn-success btn-block btn-lg" >Sign me in</button>
+            </div>
+            <!-- div *ngIf="error" class="alert alert-danger">{{error}}</div -->
+        </form>
+    </div>
+</div>
+<!-- end login -->

@@ -1,0 +1,98 @@
+<app-toolbar></app-toolbar>
+<app-module-heading moduleHeading="Parameter Settings"></app-module-heading>
+<app-error [errorMsg] = "error" [successMsg]="successMsg" [infoMsg] = "infoMsg"></app-error>
+<div class="container">
+<br><br>
+
+<fieldset [disabled]="disableRecord">
+
+<!-- start loop for parameters -->
+
+<div *ngFor="let items of globalParamData; let i = index;">
+  <div class="row" *ngIf="i%3===0">
+	<div class="col-xs-4 col-sm-4">
+		<label class="col-xs-8 col-sm-8">{{globalParamData[i].paramDesc}}</label>
+		<div class="col-xs-4 col-sm-4">
+			<input type="number" name="{{globalParamData[i].paramName}}" 
+			[(ngModel)]="globalParamData[i].paramIntValue" value="{{globalParamData[i].paramIntValue}}" 
+			class="input-sm form-control">
+		</div>
+	</div>
+	<div class="col-xs-4 col-sm-4" >
+		<label class="col-xs-8 col-sm-8">{{globalParamData[i+1].paramDesc}}</label>
+		<div class="col-xs-4 col-sm-4">
+			<input type="number" name="{{globalParamData[i+1].paramName}}" 
+			[(ngModel)]="globalParamData[i+1].paramIntValue" value="{{globalParamData[i+1].paramIntValue}}" 
+			class="input-sm form-control">
+		</div>
+	</div> 
+	<div class="col-xs-4 col-sm-4" >
+		<label class="col-xs-8 col-sm-8">{{globalParamData[i+2].paramDesc}}</label>
+		<div class="col-xs-4 col-sm-4">
+			<input type="number" name="{{globalParamData[i+2].paramName}}" 
+			[(ngModel)]="globalParamData[i+2].paramIntValue" value="{{globalParamData[i+2].paramIntValue}}"  
+			class="input-sm form-control">
+		</div>
+	</div>
+	<br>	
+  </div>
+ </div>
+ 
+<!-- End loop for parameters -->
+<br><br>
+   
+   <!-- Checkboxes Headers  -->
+   
+   <div class="row" *ngIf="productList?.length > 0">
+   		<div class="col-xs-6 col-sm-6 text-center">
+   			<label class="col-xs-12 col-sm-12">CKA 3A Products</label>
+   		</div>   		
+   		<div class="col-xs-6 col-sm-6 text-center">
+   			<label class="col-xs-12 col-sm-12">CKA 3B Products</label>
+   		</div>
+   </div>
+   
+   <!-- End header -->
+   
+   <!-- Radio button loop -->
+   <div class="row" *ngFor="let product of productList; let i = index">
+   		<div class="col-xs-6 col-sm-6">
+   			<div class="radio">
+	  			<label>
+	  			<input type="radio" name="{{product.name}}" (click)="product.cka3bType = false; product.cka3aType = true;" 
+	  			[value]="product.cka3aType" [checked]="product.cka3aType === true"/>
+	  			{{product.description}}
+	  			</label>
+	  		</div>
+	  	</div>
+	  	<div class="col-xs-6 col-sm-6">
+	  		<div class="radio">
+	  		<label>
+	  			<input type="radio" name="{{product.name}}" (click)="product.cka3aType = false; product.cka3bType = true;" 
+	  			[value]="product.cka3bType" [checked]="product.cka3bType === true"/>
+	  			{{product.description}}
+	  		</label>
+	  		</div>
+	  	</div>
+	  	
+   </div>
+   
+ </fieldset>
+ 
+  <!-- End Radio button loop -->
+   
+   <div class="row">
+   
+   		<div class="col-xs-7 col-sm-7 form-group" [ngClass]="{'showContent': hideApproveReject }">
+  			<button type="submit" class="btn btnSave btn-danger pull-right" (click)="updateRequest('REJECTED')">Reject</button>
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="updateRequest('APPROVED')">Approve</button>	
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="unlockData()">Exit</button>		
+  		</div>
+  		
+		<div class="col-xs-12 col-sm-12">
+			<div class="col-xs-12 col-sm-12">      
+				<!-- <button type="submit" class="btn btnSearch btn-warning pull-right buttonWidth" (click)="edit()">Edit</button>   -->      	
+	    	</div>
+	    </div>
+ 	</div>
+</div>

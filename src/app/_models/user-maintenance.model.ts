@@ -1,0 +1,31 @@
+export class UserMaintenanceModel {
+    userLoginId: string = null;
+    userName: string= null;
+    userDepartment: string= null;
+    userDesignation: string= null;
+    activeInd: string= null;
+    usergroupId: number= null;
+    userLastloginDtm: string= null;
+    userStatus: string = 'Active';
+    userType: number= null;
+    userBscGrade: string = "Grade E";
+    userEffectiveFromDt: string= null;
+    userEffectiveToDt: string= null;
+    userBranch: string= null;
+    userRepId: number= null;
+    currUserTempId: number= null;
+    createDtm: string= "";
+    agentCode: string = null;
+    createdBy: number= null;
+    lastUpDateDtm: string= "";
+    lastUpdatedBy: number= null;
+    selectedRep: string = "No";
+    representativeId: string = null;
+    version: number= null;
+    iasNotificationId: number= null;
+    userGroupName: string= "";
+    pfNum: string= null;
+    phone: string= null;
+    email: string= null;
+    userProductMap : Array<any>;
+}

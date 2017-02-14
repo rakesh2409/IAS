@@ -1,0 +1,83 @@
+<form class="form-inline">
+  <div class="row">
+    <!-- Profiles table
+    <div class="col-xs-2 col-sm-2">
+        <div class="col-xs-12 col-sm-12 text-center well">
+    		<b>Profile Name</b>
+    	</div>
+    	<div class="col-xs-12 col-sm-12 no-padding">
+	        <table class="table table-bordered table-responsive table-hover">
+	          <tbody>
+	            <tr *ngFor="let item of profiles; let i = index" (click)="setClickedRowProfiles(i)" [class.active]="i == selectedRowProfiles">
+	              <td  (click)="getModulesByProfileId(item.usergroupId)">{{item.usergroupName}}</td>
+	            </tr>
+	          </tbody>
+	        </table>
+	    </div>
+    </div> -->
+    <!-- Assigned Modules  -->
+    <div class="col-xs-4 col-sm-4">
+    	<div class="col-xs-12 col-sm-12 text-center well">
+    		<b>Modules</b>
+    	</div>
+    	<div class="col-xs-12 col-sm-12 no-padding">
+	        <table class="table table-bordered table-responsive table-hover" >
+	          <tbody>
+	            <tr *ngFor="let item of modules; let i = index" (click)="setClickedRowModules(i)" [class.active]="i == selectedRowModules">
+            		<td *ngIf="item.availableModule" (click)="selectModuleById(item.moduleId)">{{item.moduleName}}</td>
+            	</tr>
+	          </tbody>
+	        </table>
+	    </div>
+    </div>
+
+    <!-- Entitlements  -->
+    <div class="col-xs-4 col-sm-4">
+        <table class="table table-bordered  td table-striped table-responsive table-hover">
+          <!--<thead>
+            <tr>
+              <th colspan="4" *ngIf="moduleName">{{moduleName}} Entitlements</th>
+            </tr>
+          </thead>-->
+          <thead>
+            <tr>
+              <th>Entitlements</th>
+              <th>VIEW</th>
+              <th>EDIT</th>
+              <th>HIDDEN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of entitlements" >
+              <td>{{item.entitlementName}}</td>
+              <td><input name="options_{{item.entitlementName}}" type="radio"
+              		[value]="READ" [checked]="item.accessCode === 'READ'"
+              		(change)="updateEntitlement(item.entitlementId,'READ')" [disabled]="disableRecords==true ? true : null"/></td>
+              <td><input name="options_{{item.entitlementName}}" type="radio"
+              		[value]="READ_WRITE" [checked]="item.accessCode === 'READ_WRITE'"
+              		(change)="updateEntitlement(item.entitlementId,'READ_WRITE')" [disabled]="disableRecords==true ? true : null"/></td>
+              <td><input name="options_{{item.entitlementName}}" type="radio"
+              		[value]="HIDDEN" [checked]="item.accessCode === 'HIDDEN'"
+              		(change)="updateEntitlement(item.entitlementId,'HIDDEN')" [disabled]="disableRecords==true ? true : null"/></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    
+    <div class="col-xs-12 col-sm-12">
+    	 <div class="col-xs-8 col-sm-8">
+    	 </div>
+         <div class="col-xs-1 col-sm-1">
+    		<button type="button" class="btn btn-warning pull-right" (click) = "approveRequest()"  [ngClass]="{'showApprove': hideApprove }">Approve</button>
+    	 </div>
+         <div class="col-xs-1 col-sm-1">
+    		<button type="button" class="btn btn-warning pull-right" (click) = "rejectRequest()"  [ngClass]="{'showApprove': hideApprove }">Reject</button>
+    	 </div>
+         <div class="col-xs-1 col-sm-1">
+    		<button type="button" class="btn btn-warning pull-right" (click) = "unlockData()"  [ngClass]="{'showApprove': hideApprove }">Unlock</button>
+    	 </div>
+    </div>
+    
+    
+  </div>
+</form>

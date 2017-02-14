@@ -1,0 +1,122 @@
+[
+    {
+      "ptypeid": 1,
+      "id": 1,
+      "name": "Unit Trust 1",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 1,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Regular Premium",
+      "tenure": 5
+    },
+    {
+      "ptypeid": 1,
+      "id": 4,
+      "name": "Unit Trust 4",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 4,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Regular Premium",
+      "tenure": 20
+    },
+    {
+      "ptypeid": 1,
+      "id": 5,
+      "name": "Unit Trust 5",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 1,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Regular Premium",
+      "tenure": 10
+    },
+    {
+      "ptypeid": 2,
+      "id": 1,
+      "name": "Insurance 1",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 1,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Regular Premium",
+      "tenure": 5
+    },
+    {
+      "ptypeid": 2,
+      "id": 2,
+      "name": "Insurance 2",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 3,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Regular Premium",
+      "tenure": 10
+    },
+    {
+      "ptypeid": 2,
+      "id": 3,
+      "name": "Insurance 3",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 5,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Not Applicable",
+      "tenure": 15
+    },
+    {
+      "ptypeid": 2,
+      "id": 4,
+      "name": "Insurance 4",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 4,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Not Applicable",
+      "tenure": 20
+    },
+    {
+      "ptypeid": 2,
+      "id": 5,
+      "name": "Insurance 5",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 1,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Not Applicable",
+      "tenure": 10
+    },
+    {
+      "ptypeid": 1,
+      "id": 2,
+      "name": "Unit Trust 2",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 3,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Single/Lumpsum Premium",
+      "tenure": 10
+    },
+    {
+      "ptypeid": 1,
+      "id": 3,
+      "name": "Unit Trust 3",
+      "currency": "SGD",
+      "state": "Active",
+      "riskRating": 5,
+      "clientSegment": "Retail/Premier",
+      "aiStatus": "No",
+      "premiumType": "Not Applicable",
+      "tenure": 15
+    }
+]

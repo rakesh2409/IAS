@@ -1,0 +1,14 @@
+.well {
+	margin-bottom: 0px;
+	background-color: #C1CCD1;
+}
+
+.no-padding {
+	padding: 0px;
+	max-height: 400px;
+	overflow: auto
+}
+
+.showApprove {
+	display:none;
+}

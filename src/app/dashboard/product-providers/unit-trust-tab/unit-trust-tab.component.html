@@ -1,0 +1,145 @@
+<div #container>
+  <div class="row">
+	<div class="col-xs-12 col-sm-12">
+    	<form>       
+        <div class="col-xs-6 col-sm-6">
+            <input #fundSearch class="form-control"  id="profile-name-search" name="profile-name-search"  type="text"  style="width: 60%;" required
+            placeholder="Search Fund House here..." >
+        </div> 
+        <div class="col-xs-6 col-sm-6">
+	        <button type="submit" class="btn btnSearch btn-warning pull-right buttonWidth" (click)="searchUnitTrust(fundSearch.value)">Search</button>        	
+        </div>
+        </form>
+    </div>
+ </div>
+ <hr style="width: 100%; color: #c1ccd1; height: 1px; background-color:#c1ccd1;" />
+ <fieldset [disabled]="disableRecord">
+ <div class="row">
+ 	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Fund House</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.providerName" name="fundHouse" [disabled]="disableField" placeholder="Enter Fund house here (Required)" class="input-sm form-control" required maxlength=100>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Post Code</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.postcode" name="post-code" placeholder="Enter post code here (Required)" class="input-sm form-control" required  maxlength=10>
+		</div>
+	</div>
+ </div>
+  <div class="row">
+ 	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Fund Address</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.addressDetAdd1" name="address" placeholder="Address Line 1 (Required)" class="input-sm form-control" required maxlength=40>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Country</label>
+		<div class="col-xs-8 col-sm-8">
+			<select class="form-control" [(ngModel)]="ppModel.country" name="country" required>
+	           <option value="Malaysia" selected>Malaysia</option>
+	           <option value="Singapore">Singapore</option>
+	           <option value="Philippines">Philippines</option>
+	        </select>
+		</div>
+	</div>
+ </div>
+   <div class="row">
+ 	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4"></label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.addressDetAdd2" name="address" placeholder="Address Line 2 (Optional)" class="input-sm form-control" maxlength=40>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Phone</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.phoneNum" name="phone" placeholder="Phone Number (Required)" class="input-sm form-control" maxlength=20>
+		</div>
+	</div>
+ </div>
+ 
+ <div class="row">
+ 	<div class="col-xs-6 col-sm-6 form-group no-padding">
+ 		<label class="col-xs-4 col-sm-4"></label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.addressDetAdd3" name="address" placeholder="Address Line 3 (Optional)" class="input-sm form-control" maxlength=40>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Fax</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.fax" name="fax" placeholder="Fax Number (Required)" class="input-sm form-control"  maxlength=20>
+		</div>
+	</div>
+ </div>
+  <div class="row">
+ 	<div class="col-xs-6 col-sm-6 form-group no-padding">
+ 		<label class="col-xs-4 col-sm-4"></label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.addressDetAdd4" name="address" placeholder="Address Line 4 (Optional)" class="input-sm form-control" maxlength=40>
+		</div>
+	</div>
+	<div class="col-xs-6 col-sm-6 form-group no-padding">
+		<label class="col-xs-4 col-sm-4">Upfront Fee %</label>
+		<div class="col-xs-8 col-sm-8">
+			<input type="text" [(ngModel)]="ppModel.upfrontFeePer" name="upFront" placeholder="Upfront Fee (Optional)" class="input-sm form-control" maxlength=3>
+		</div>
+	</div>
+ </div>
+ </fieldset>
+ <div class="row">
+    <div class="col-xs-7 col-sm-7 form-group" [ngClass]="{'showContent': hideApproveReject }">
+  			<button type="submit" class="btn btnSave btn-danger pull-right" (click)="updateRequest('REJECTED')">Reject</button>
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="updateRequest('APPROVED')">Approve</button>	
+  			<button type="submit" class="btn btnSave btn-primary pull-right" (click)="unlockData()">Exit</button>		
+  		</div>
+  	<fieldset [disabled]="disableRecord">
+		<div class="col-xs-12 col-sm-12">
+			<div class="col-xs-12 col-sm-12">   
+				<button type="submit" class="btn btnSearch btn-warning pull-right buttonWidth" (click)="clearFields()">Clear</button>        	
+	    	</div>
+	    </div>
+    </fieldset>
+ </div>
+ <br>
+ <div class="row">
+ 	<div class="col-xs-12 col-sm-12">
+  		<table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Fund House</th>
+              <th>Fund Address</th>
+              <th>Address 2</th>
+              <th>Address 3</th>
+              <th>Address 4</th>
+              <th>Post Code</th>
+              <th>Country</th>
+              <th>Phone</th>
+              <th>Fax</th>
+              <th>Up Front Fee %</th>
+            </tr>
+          </thead>
+          <tbody>
+          	  <tr (dblclick)="selectUTRow(items)" *ngFor="let items of unitTrustList; let i = index" (click)="setActiveRow(i)" [class.active]="i == activeRowIndex" >
+			  <td>{{items.providerName}}</td>
+			  <td>{{items.addressDetAdd1}}</td>
+			  <td>{{items.addressDetAdd2}}</td>
+			  <td>{{items.addressDetAdd3}}</td>
+			  <td>{{items.addressDetAdd4}}</td>
+			  <td>{{items.postcode}}</td>
+			  <td>{{items.country}}</td>
+			  <td>{{items.phoneNum}}</td>
+			  <td>{{items.postcode}}</td>
+			  <td>{{items.upfrontFeePer}}</td>
+		      </tr>
+		      <tr *ngIf="unitTrustList?.length <= 0">
+		      	<td colspan="10">No items in the list</td>
+		      </tr>
+          </tbody>
+        </table>
+  	</div>
+ </div>
+</div>

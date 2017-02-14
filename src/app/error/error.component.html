@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-sm-12" *ngIf="errorMsg">
+    <p class='alert alert-danger fade in alert-dismissable text-center' >
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"><i class="fa fa-remove"></i></a>
+      {{ errorMsg }}
+    </p>
+  </div>
+  <div class="col-sm-12" *ngIf="successMsg">
+  	<p class='alert alert-success fade in alert-dismissable text-center'  >
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"><i class="fa fa-remove"></i></a>
+    	<strong>Success!</strong> {{ successMsg }}
+    </p>
+  </div>
+  <div class="col-sm-12" *ngIf="infoMsg">
+    <p class='alert alert-info fade in alert-dismissable text-center' >
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"><i class="fa fa-remove"></i></a>
+      <strong>Info:</strong> {{ infoMsg }}
+    </p>
+  </div>
+  <div class="col-sm-12" *ngIf="warningMsg">
+    <p class='alert alert-warning fade in alert-dismissable text-center' >
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"><i class="fa fa-remove"></i></a>
+      <strong>Warning:</strong> {{ warningMsg }}
+    </p>
+  </div>
+  <div class="col-sm-12" *ngIf="dangerMsg">
+    <p class='alert alert-danger fade in alert-dismissable text-center' >
+      <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close"><i class="fa fa-remove"></i></a>
+      <strong>Danger:</strong> {{ dangerMsg }}
+    </p>
+  </div>
+</div>

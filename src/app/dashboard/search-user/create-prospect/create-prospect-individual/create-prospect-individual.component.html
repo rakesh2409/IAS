@@ -1,0 +1,551 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="panel panel-default">
+			<!--<div class="panel-heading">
+				<h4>Create Prospect (Individual)</h4>
+				 End of panel-heading 
+			</div>-->
+
+			<div class="panel-body"> 
+			
+				<div class="col-xs-12 col-sm-12">
+					<!-- Group panel: Personal Particulars -->
+					<fieldset class="fsStyle">
+
+						<!--Group Label: Personal Particulars  -->
+						<legend class="legendStyle">Personal Particulars - Main
+							Applicant</legend>
+						<form #createIndivForm="ngForm" (submit)="indivFormSubmit(createIndivForm)" novalidate>
+							<!-- Salutation -->
+							<div class="row">
+								<!-- Label: Salutation -->
+								<label class="col-sm-2">Salutation</label>
+	
+								<div class="col-sm-2">
+								
+									<!-- Dropdown: Salutation (Array)-->
+									<select class="form-control" name="utSector"  [(ngModel)]="clientModel.clientSalutationId">
+										<option value="default">Select</option>
+										<option *ngFor="let client of salutationArray" value="{{client.descCode}}">{{client.description}}</option>
+									</select>
+								</div>
+								<!-- End of Salutation Dropdown: Column -->
+	
+							</div>
+							<!--End of Salutation: Row  -->
+	
+							<!-- Client Name  -->
+							<div class="row">
+								<!-- Label: Last Name -->
+								<label class="col-sm-2">Full Name (NRIC/Passport)<span class="color">*</span></label>
+	
+								<div class="col-sm-4">
+									<!-- Input: -->
+									<input type="text" name="clientLName"
+										class="input-sm form-control" maxlength=40
+										placeholder="Full Name" [(ngModel)]="clientModel.clientFullname">
+								</div>
+								<!-- End of Full Name Input: Column -->
+							</div>
+							<!--End of Client Name: Row  -->
+	
+							<!-- ID  -->
+							<div class="row">
+								<!-- Label: ID Type -->
+								<label class="col-sm-2">ID Type <span class="color">*</span></label>
+	
+								<div class="col-sm-4">
+									<!-- ***UPDATE:Dropdown: ID Type (Array)***-->
+									<select class="form-control" name="clientIdType"   [(ngModel)]="clientModel.clientIdType">
+										<option *ngFor="let client of idTypeArray" value="{{client.descCode}}">{{client.description}}</option>
+									</select>
+								</div>
+								<!-- End of ID Type Dropdown: Column -->
+	
+								<!-- Label: ID Number -->
+								<label class="col-sm-1">ID No <span class="color">*</span></label>
+	
+								<div class="col-sm-2">
+									<!-- Input: -->
+									<input type="text" name="clientIDNo"
+										class="input-sm form-control" maxlength=20 placeholder="ID No"  [(ngModel)]="clientModel.clientIdNo">
+								</div>
+								<!-- End of ID Number Input: Column -->
+	
+							</div>
+							<!--End of ID: Row  -->
+	
+							<!-- Date of Birth  -->
+							<div class="row">
+								<!-- Label: Date of Birth -->
+								<label class="col-sm-2">Date of Birth <span class="color">*</span></label>
+	
+								<div class="col-sm-2">
+									<!-- Date Picker : date of Birth-->
+									<input type="date" name="clientBirthDate"
+										class="input-sm form-control"  [(ngModel)]="clientModel.clientExt.client_bir_Inc_dt">
+								</div>
+								<!-- End of Date of Birth DatePicker: Column -->
+	
+							</div>
+							<!--End of Date of Birth: Row  -->
+	
+							<!-- Gender  -->
+							<div class="row form-inline">
+								<!-- Label: Date of Birth -->
+								<label class="col-sm-2">Gender <span class="color">*</span></label>
+	
+								<div class="col-sm-2">
+									<!-- radio Button: Gender-->
+									<div class="custom-controls-stacked form-inline">
+										<label class="custom-control custom-radio"> <input
+											id="male" name="gender" type="radio"
+											class="custom-control-input" [value]="1" [(ngModel)]="clientModel.clientGenderId" [checked]="clientModel.clientGenderId === '1'"> <span
+											class="custom-control-indicator"></span> <span
+											class="custom-control-description">Male</span>
+										</label> <label class="custom-control custom-radio"> <input
+											id="female" name="gender" type="radio"
+											class="custom-control-input" [value]="2" [(ngModel)]="clientModel.clientGenderId" [checked]="clientModel.clientGenderId === '2'"> <span
+											class="custom-control-indicator"></span> <span
+											class="custom-control-description" >Female</span>
+										</label>
+									</div>
+								</div>
+								<!-- End of Gender: Column -->
+	
+							</div>
+							<!--End of Gender: Row  -->
+	
+							<!-- Nationality  -->
+							<div class="row">
+	
+								<!-- Label: Nationality -->
+								<label class="col-sm-2">Nationality <span class="color">*</span></label>
+	
+								<div class="col-sm-4">
+									<!-- ***UPDATE:Dropdown:Nationality use Country (Array)***-->
+									<select class="form-control" name="clientNationality" [(ngModel)]="clientModel.clientNationalityDesc">
+										<option *ngFor="let client of countryArray" value="{{client.descCode}}">{{client.description}}</option>
+									</select>
+								</div>
+								<!-- End of Nationality Dropdown: Column -->
+	
+							</div>
+							<!--End of Nationality: Row  -->
+	
+							<!-- Residential Address  -->
+							<div class="form-group row">
+	
+								<!-- Label: Registered Address -->
+								<label class="col-sm-2">Registered Address <span
+									class="color">*</span></label>
+	
+								<!-- Column: Registered Address1 -->
+								<div class="col-sm-6">
+	
+									<!-- Input: Address1 -->
+									<input type="text" name="clientAddress1"
+										class="input-sm form-control" maxlength=40
+										placeholder="Registered Address" [(ngModel)]="clientModel.clientAddressDet[0].addressLine1">
+								</div>
+								<!-- End of Address1 Input: Column -->
+	
+							</div>
+							<!--End of Address1: Row  -->
+	
+							<!-- Residential Address 2 -->
+							<div class="form-group row">
+	
+								<!-- Label: Registered Address 2 -->
+								<label class="col-sm-2"><span class="color"></span></label>
+	
+								<!-- Column: Registered Address 2 -->
+								<div class="col-sm-6">
+	
+									<!-- Input:Address 2 -->
+									<input type="text" name="clientAddress2"
+										class="input-sm form-control" maxlength=40 [(ngModel)]="clientModel.clientAddressDet[0].addressLine2">
+								</div>
+								<!-- End of Address2 Input: Column -->
+	
+							</div>
+							<!--End of Address2: Row  -->
+	
+							<!-- Residential Address 3 -->
+							<div class="form-group row">
+	
+								<!-- Label: Registered Address 3 -->
+								<label class="col-sm-2"><span class="color"></span></label>
+	
+								<!-- Column: Registered Address 3 -->
+								<div class="col-sm-6">
+	
+									<!-- Input:Address 3 -->
+									<input type="text" name="clientAddress3"
+										class="input-sm form-control" maxlength=40 [(ngModel)]="clientModel.clientAddressDet[0].addressLine3">
+								</div>
+								<!-- End of Address3 Input: Column -->
+	
+							</div>
+							<!--End of Address3: Row  -->
+	
+							<!-- Residential Address 4 -->
+							<div class="form-group row">
+	
+								<!-- Label: Registered Address 4 -->
+								<label class="col-sm-2"><span class="color"></span></label>
+	
+								<!-- Column: Registered Address 4 -->
+								<div class="col-sm-6">
+	
+									<!-- Input: Address4 -->
+									<input type="text" name="clientAddress4"
+										class="input-sm form-control" maxlength=40 [(ngModel)]="clientModel.clientAddressDet[0].addressLine4">
+								</div>
+								<!-- End of Address4 Input: Column -->
+	
+							</div>
+							<!--End of Address4: Row  -->
+	
+							<!-- Street Address  -->
+							<div class="row">
+	
+								<!-- Label: Street -->
+								<label class="col-sm-2">Street</label>
+	
+								<!-- Column: Street -->
+								<div class="col-sm-4">
+	
+									<!-- Input: -->
+									<input type="text" name="clientStreet"
+										class="input-sm form-control" maxlength=80 placeholder="Street" [(ngModel)]="clientModel.clientAddressDet[0].addressStName">
+								</div>
+								<!-- End of Street: Column -->
+	
+							</div>
+							<!--End of Street: Row  -->
+	
+							<!-- PostCode  -->
+							<div class="row">
+	
+								<!-- Label: PostCode -->
+								<label class="col-sm-2">Postcode</label>
+	
+								<!-- Column: Postcode -->
+								<div class="col-sm-4">
+	
+									<!-- Input:PostCode -->
+									<input type="text" name="clientPostCode"
+										class="input-sm form-control" maxlength=10
+										placeholder="Postcode" [(ngModel)]="clientModel.clientAddressDet[0].addressPostcode">
+								</div>
+								<!-- End of PostCode Input: Column -->
+	
+							</div>
+							<!--End of PostCode: Row  -->
+	
+	
+							<!-- Contact No Mobile  -->
+							<div class="row">
+	
+								<!-- Label: Mobile -->
+								<label class="col-sm-2">Contact No &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Mobile) <span
+									class="color">*</span>
+								</label>
+	
+								<!-- Column: Mobile -->
+								<div class="col-sm-4">
+									<!-- Input:Mobile -->
+									<div class="input-group">
+										<span class="input-group-addon">02</span> <input
+											id="client-mobile" type="text" class="form-control"
+											maxlength=20 name="clientMobile" placeholder="Mobile No"  [(ngModel)]="clientModel.clientMobileId">
+									</div>
+									<!-- End of Input Mobile: Class -->
+	
+								</div>
+								<!-- End of Mobile Input: Column -->
+	
+							</div>
+							<!--End of Mobile: Row  -->
+	
+							<!-- Contact No Home  -->
+							<div class="row">
+	
+								<!-- Label: Home -->
+								<label class="col-sm-2"><p style="text-indent:7em;">(Home)</p> </label>
+	
+								<!-- Column: Home -->
+								<div class="col-sm-4">
+	
+									<!-- Input:PostCode -->
+									<input type="text" name="clientHomeNo"
+										class="input-sm form-control" maxlength=20
+										placeholder="Home No" [(ngModel)]="clientModel.clientHomeId">
+								</div>
+								<!-- End of Home Input: Column -->
+	
+							</div>
+							<!--End of Home: Row  -->
+	
+							<!-- Contact No Office  -->
+							<div class="row">
+	
+								<!-- Label: Office -->
+								<label class="col-sm-2"><p style="text-indent:7em;">(Office)</p></label>
+	
+								<!-- Column: Office -->
+								<div class="col-sm-4">
+	
+									<!-- Input:PostCode -->
+									<input type="text" name="clientOffice"
+										class="input-sm form-control" maxlength=20
+										placeholder="Office No" [(ngModel)]="clientModel.clientOfficeId">
+								</div>
+								<!-- End of Office Input: Column -->
+	
+							</div>
+							<!--End of Office: Row  -->
+
+						</form>
+					</fieldset>
+					<!-- End of Personal Particulars: Group -->
+				</div>
+				<!--End of Personal Particulars: Column  -->
+
+				<!-- Additional Information -->
+				<div class="col-xs-12 col-sm-12">
+					<!-- Group panel: Additional Information -->
+					<fieldset class="fsStyle">
+
+						<!--Group Label: Personal Particulars  -->
+						<legend class="legendStyle">Additional Information</legend>
+
+						<!-- Email -->
+						<div class="row">
+							<!-- Label: Email -->
+							<label class="col-sm-2">Email</label>
+
+							<div class="col-sm-4">
+
+								<!--Input: Email-->
+								<input type="text" name="clientEmail"
+									class="input-sm form-control" placeholder="Email" [(ngModel)]="clientModel.clientExt.clientEmailId">
+							</div>
+							<!-- End of Email: Column -->
+
+						</div>
+						<!--End of Email: Row  -->
+
+						<!-- Marital Status  -->
+						<div class="row form-inline">
+
+							<!-- Label: Marital Status -->
+							<label class="col-sm-2">Marital Status <span
+								class="color">*</span></label>
+ 
+							<div class="col-sm-6">
+								<!-- radio Button: Marital Status-->
+								<div class="custom-controls-stacked form-inline">
+									<label class="custom-control custom-radio"> <input
+										id="Single" name="maritalStatus" type="radio"
+										class="custom-control-input" [value]="1" [(ngModel)]="clientModel.clientMaritalId" [checked]="clientModel.clientMaritalId === '1'"> <span
+										class="custom-control-indicator"></span> <span
+										class="custom-control-description">Single</span>
+									</label> <label class="custom-control custom-radio"> <input
+										id="Married" name="maritalStatus" type="radio"
+										class="custom-control-input" [value]="2" [(ngModel)]="clientModel.clientMaritalId" [checked]="clientModel.clientMaritalId === '2'"> <span
+										class="custom-control-indicator"></span> <span
+										class="custom-control-description">Married</span>
+									</label> <label class="custom-control custom-radio"> <input
+										id="Divorced" name="maritalStatus" type="radio"
+										class="custom-control-input"  [value]="3" [(ngModel)]="clientModel.clientMaritalId" [checked]="clientModel.clientMaritalId === '3'"> <span
+										class="custom-control-indicator"></span> <span
+										class="custom-control-description">Divorced</span>
+									</label> <label class="custom-control custom-radio"> <input
+										id="Widowed" name="maritalStatus" type="radio"
+										class="custom-control-input"  [value]="4" [(ngModel)]="clientModel.clientMaritalId" [checked]="clientModel.clientMaritalId === '4'"> <span
+										class="custom-control-indicator"></span> <span
+										class="custom-control-description">Widowed</span>
+									</label>
+								</div>
+								<!-- End of Radio Button: Div Class -->
+
+							</div>
+							<!-- End of Gender: Column -->
+
+						</div>
+						<!-- End of Gender: Row -->
+
+						<!-- Highest Education Level  -->
+						<div class="row">
+
+							<!-- Label: Education Level -->
+							<label class="col-sm-2">Highest Educational Level</label>
+
+							<div class="col-sm-4">
+								<!-- Dropdown:Educ Level(Array)-->
+								<select class="form-control" name="clientEducLevel"  [(ngModel)]="clientModel.clientEducationId">
+									<option *ngFor="let client of educationLevelArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Education Level Dropdown: Column -->
+
+						</div>
+						<!--End of Education Level: Row  -->
+
+						<!-- Employment Status  -->
+						<div class="row">
+
+							<!-- Label: Employment Status -->
+							<label class="col-sm-2">Employment Status</label>
+
+							<div class="col-sm-4">
+								<!-- Dropdown:Educ Level(Array)-->
+								<select class="form-control" name="clientEmpStatus"  [(ngModel)]="clientModel.clientEmploymentStatus">
+									<option *ngFor="let client of employmentStatusArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Employment Status Dropdown: Column -->
+
+						</div>
+						<!--End of Employment Status: Row  -->
+
+						<!-- Company Name -->
+						<div class="row">
+
+							<!-- Label: Company Name -->
+							<label class="col-sm-2">Company Name</label>
+
+							<div class="col-sm-4">
+
+								<!--Input: Company Name-->
+								<input type="text" name="clientCompName"
+									class="input-sm form-control" placeholder="Company Name"
+									maxvalue=80  [(ngModel)]="clientModel.clientCompanyName">
+							</div>
+							<!-- End of Company Name: Column -->
+
+						</div>
+						<!--End of Company Name: Row  -->
+
+						<!-- Industry  -->
+						<div class="row">
+
+							<!-- Label: Industry -->
+							<label class="col-sm-2">Industry</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown:Industry(Array)***-->
+								<select class="form-control" name="clientIndustry"  [(ngModel)]="clientModel.clientExt.clientIndustryId">
+									<option *ngFor="let client of clientIndustrysArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Industry Dropdown: Column -->
+
+						</div>
+						<!--End of Industry: Row  -->
+
+						<!-- Occupation  -->
+						<div class="row">
+
+							<!-- Label: Occupation -->
+							<label class="col-sm-2">Occupation</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown: Occupation (Array)***-->
+								<select class="form-control" name="clientOccupation"  [(ngModel)]="clientModel.clientOccupation">
+									<option *ngFor="let client of clientOccupationArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Occupation Dropdown: Column -->
+
+						</div>
+						<!--End of Occupation: Row  -->
+
+						<!-- Previous Industry  -->
+						<div class="row">
+
+							<!-- Label: Previous Industry -->
+							<label class="col-sm-2">Previous Industry</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown: Previous Industry (Array)***-->
+								<select class="form-control" name="clientPrevIndustry"  [(ngModel)]="clientModel.clientExt.clientPrevIndustryId">
+									<option *ngFor="let client of clientPrevIndustryArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Previous Industry Dropdown: Column -->
+
+						</div>
+						<!--End of Previous Industry: Row  -->
+
+						<!-- Previous Occupation  -->
+						<div class="row">
+
+							<!-- Label: Previous Occupation -->
+							<label class="col-sm-2">Previous Occupation</label>
+
+							<div class="col-sm-4">
+								<!-- ***UPDATE:Dropdown: Previous Occupation (Array)***-->
+								<select class="form-control" name="clientPrevOccupation"   [(ngModel)]="clientModel.clientPreviousOccupation">
+									<option *ngFor="let client of clientPrevOccupationArray"  value="{{client.descCode}}">{{client.description}}</option>
+								</select>
+							</div>
+							<!-- End of Previous Occupation Dropdown: Column -->
+
+						</div>
+						<!--End of Previous Occupation: Row  -->
+
+						<!-- Previous Company -->
+						<div class="row">
+							<!-- Label: Previous Company -->
+							<label class="col-sm-2">Previous Company</label>
+
+							<div class="col-sm-4">
+
+								<!--Input: Previous Company-->
+								<input type="text" name="clientPrevCompany"
+									class="input-sm form-control" placeholder="Previous Company"
+									maxvalue=80   [(ngModel)]="clientModel.clientPreviousCompanyName">
+							</div>
+							<!-- End of Previous Company: Column -->
+
+						</div>
+						<!--End of Previous Company: Row  -->
+					</fieldset>
+					<!-- End of Additional Info: Group Panel-->
+				</div>
+				<!-- End of Additional Info -->
+
+				<!-- Buttons -->
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-left" routerLink="/dashboard/search-user/search-client-prospect">
+								<span class="glyphicon glyphicon-chevron-left"></span> Back
+							</button>
+						</div>
+						<div class="col-xs-1 col-sm-6">
+							<button type="button"
+								class="btn btn-space btn-warning custom-button-width pull-right" (click)="saveIndClientProspect()">
+								Save <span class="glyphicon glyphicon-chevron-right"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<!-- End of Buttons -->
+
+			</div>
+			<!-- End of panel-body -->
+
+		</div>
+		<!-- End of panel-default -->
+
+
+
+	</div>
+	<!-- end of page row -->
+
+</div>
